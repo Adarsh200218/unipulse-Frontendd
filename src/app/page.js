@@ -136,21 +136,21 @@ function Table() {
 
             {/* Catalogue */}
             <td className="border p-2 text-center">
-              <a href={item.catalogue} target="_blank">
+              <a href={item.catalogue} >
                 <Omega className="inline-block cursor-pointer hover:text-red-500" />
               </a>
             </td>
 
             {/* Manual */}
             <td className="border p-2 text-center">
-              <a href={item.manual} target="_blank">
+              <a href={item.manual} >
                 <Omega className="inline-block cursor-pointer hover:text-red-500" />
               </a>
             </td>
 
             {/* Price */}
             <td className="border p-2 text-center">
-              <a href={item.price} target="_blank">
+              <a href={item.price} >
                 <Omega className="inline-block cursor-pointer hover:text-red-500" />
               </a>
             </td>
