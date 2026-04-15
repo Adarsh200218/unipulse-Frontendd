@@ -77,7 +77,7 @@ export default function Sidebar() {
         <input
           type="text"
           placeholder="Product Search"
-          className="flex-1 px-2 py-1 outline-none text-xs"
+          className="flex-1 px-2 py-1 outline-none text-xs "
         />
         <button className="px-3 border-l bg-gray-100">🔍</button>
       </div>
@@ -91,7 +91,7 @@ export default function Sidebar() {
             {/* PARENT */}
             <div
               onClick={() => toggleMenu(index)}
-              className={`flex justify-between items-center px-3 py-2 cursor-pointer font-medium 
+              className={`flex justify-between items-center px-3 py-2 cursor-pointer font-bold
               ${openIndex === index ? "bg-gray-300" : "bg-gray-200"}`}
             >
               {menu.title}

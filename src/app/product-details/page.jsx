@@ -17,7 +17,7 @@ const products = [
   {
     title: "UTM III (R)(H)",
     subtitle: "Rotary encoder option for UTMIII series",
-    img: "/images/p2.png",
+    img: "/images/p1.png",
     desc: [
       "5 times more responsive than UTM II.",
       "Optical encoder 3600 C/T suitable for torque measurement.",
@@ -27,7 +27,7 @@ const products = [
   {
     title: "UTM III (C)(RC)",
     subtitle: "Centering location type rotating torque meter",
-    img: "/images/p3.png",
+    img: "/images/p1.png",
     desc: [
       "New installation option of UTMIII!",
       "New type for firm usage & fix torque meter!",
@@ -36,7 +36,7 @@ const products = [
   {
     title: "UTM II / UTM II (R)",
     subtitle: "Slip-ring-less rotating torque meter",
-    img: "/images/p4.png",
+    img: "/images/p1.png",
     desc: [
       "Maintenance-free rotating torque meter.",
       "Analogue bandwidth 1 kHz.",
@@ -52,9 +52,14 @@ export default function Page() {
       <div className="max-w-7xl mx-auto flex gap-6 py-6 px-4">
 
         {/* ================= LEFT SIDEBAR ================= */}
-        <aside className="w-[330px]">
 
-          {/* SEARCH */}
+        <ProductMenu/>
+
+
+
+        {/*<aside className="w-[330px]">
+
+       
           <div className="flex border mb-3 bg-white">
             <input
               type="text"
@@ -64,7 +69,7 @@ export default function Page() {
             <button className="px-3 border-l bg-gray-100">🔍</button>
           </div>
 
-          {/* MENU */}
+     
           <div className="border bg-white">
             <div className="bg-gray-200 px-3 py-2 font-semibold border-b">
               Torque meter
@@ -100,13 +105,13 @@ export default function Page() {
             ))}
           </div>
 
-          {/* BUTTON */}
+        
           <div className="mt-3">
             <button className="w-full border bg-white py-2 text-xs hover:bg-gray-50">
               Obsolete Products
             </button>
           </div>
-        </aside>
+        </aside>*/}
 
         {/* ================= RIGHT CONTENT ================= */}
         <div className="flex-1">
@@ -136,15 +141,15 @@ export default function Page() {
 
                 {/* TEXT */}
                 <div className="flex-1">
-                  <p className="text-[11px] text-gray-500 mb-1">
+                  <p className="text-[14px] text-gray-500 mb-1">
                     {item.subtitle}
                   </p>
 
-                  <h3 className="text-[18px] font-semibold mb-2 text-gray-800">
+                  <h3 className="text-[20px] font-semibold mb-2 text-gray-800">
                     {item.title}
                   </h3>
 
-                  <ul className="space-y-1 text-[12px] leading-relaxed">
+                  <ul className="space-y-1 text-[14px] leading-relaxed">
                     {item.desc.map((d, i) => (
                       <li key={i}>＊ {d}</li>
                     ))}
