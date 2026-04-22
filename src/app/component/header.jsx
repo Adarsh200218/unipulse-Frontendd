@@ -53,7 +53,7 @@ export default function Header() {
             <span className="w-6 h-0.5 bg-white"></span>
             <span className="w-6 h-0.5 bg-white"></span>
             <span className="w-6 h-0.5 bg-white"></span>
-          </button>
+          </button> 
         </div>
 
         {/* Mobile Menu */}

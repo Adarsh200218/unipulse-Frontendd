@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,14 +13,12 @@
   --font-mono: var(--font-geist-mono);
   --font-inter: var(--font-inter);
 
-      --navy: #c5e8e1;
-    --navy2: #243257;
-  
+  --navy: #c5e8e1;
+  --navy2: #243257;
 }
 
 .inter-font {
   font-family: var(--font-inter);
- 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,26 +29,25 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family:'Montserrat', sans-serif;
-  
+  background: #ffff;
+  /* color: var(--foreground); */
+  font-family: "Montserrat", sans-serif;
 }
 
-.color-green{
+.color-green {
   background-color: var(--bg-color);
 }
 
-.navy{
-      background: var(--navy);
+.navy {
+  background: var(--navy);
 }
 
-        html {
-          scroll-behavior: smooth;
-        }
-        h2 {
-          scroll-margin-top: 100px;
-        }
-      ul li{
-        font-family:'Montserrat', sans-serif;
-      }
+html {
+  scroll-behavior: smooth;
+}
+h2 {
+  scroll-margin-top: 100px;
+}
+ul li {
+  font-family: "Montserrat", sans-serif;
+}

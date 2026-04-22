@@ -14,6 +14,7 @@ const products = [
       "New model UTMIII! High functionality with 1/10000 resolution & 500% safe overload!",
     ],
   },
+  
   {
     title: "UTM III (R)(H)",
     subtitle: "Rotary encoder option for UTMIII series",
@@ -47,17 +48,17 @@ const products = [
 
 export default function Page() {
   return (
-<section>
+    <section>
       <div className="bg-[#efefef] min-h-screen text-[13px] text-gray-700 mt-14">
-      <div className="max-w-7xl mx-auto flex gap-6 py-6 px-4">
+        <div className="max-w-7xl mx-auto flex gap-6 py-6 px-4">
 
-        {/* ================= LEFT SIDEBAR ================= */}
+          {/* ================= LEFT SIDEBAR ================= */}
 
-        <ProductMenu/>
+          <ProductMenu />
 
 
 
-        {/*<aside className="w-[330px]">
+          {/*<aside className="w-[330px]">
 
        
           <div className="flex border mb-3 bg-white">
@@ -113,61 +114,61 @@ export default function Page() {
           </div>
         </aside>*/}
 
-        {/* ================= RIGHT CONTENT ================= */}
-        <div className="flex-1">
+          {/* ================= RIGHT CONTENT ================= */}
+          <div className="flex-1">
 
-          {/* GREEN TITLE BAR */}
-          <div className="bg-[#1f4d1f] text-white px-4 py-2 font-semibold mb-4">
-            Shaft type
-          </div>
+            {/* GREEN TITLE BAR */}
+            <div className="bg-[#1f4d1f] text-white px-4 py-2 font-semibold mb-4">
+              Shaft type
+            </div>
 
-          {/* PRODUCT LIST */}
-          <div className="space-y-5">
-            {products.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white border p-4 flex gap-5"
-              >
-                {/* IMAGE */}
-                <div className="w-[140px] flex items-center justify-center">
-                  <Image
-                    src={item.img}
-                    alt={item.title}
-                    width={120}
-                    height={120}
-                    className="object-contain"
-                  />
-                </div>
+            {/* PRODUCT LIST */}
+            <div className="space-y-5">
+              {products.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-white border p-4 flex gap-5"
+                >
+                  {/* IMAGE */}
+                  <div className="w-[140px] flex items-center justify-center">
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      width={120}
+                      height={120}
+                      className="object-contain"
+                    />
+                  </div>
 
-                {/* TEXT */}
-                <div className="flex-1">
-                  <p className="text-[14px] text-gray-500 mb-1">
-                    {item.subtitle}
-                  </p>
+                  {/* TEXT */}
+                  <div className="flex-1">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {item.subtitle}
+                    </p>
 
-                  <h3 className="text-[20px] font-semibold mb-2 text-gray-800">
-                    {item.title}
-                  </h3>
+                    <h3 className="text-[20px] font-semibold mb-2 text-gray-800">
+                      {item.title}
+                    </h3>
 
-                  <ul className="space-y-1 text-[14px] leading-relaxed">
-                    {item.desc.map((d, i) => (
-                      <li key={i}>＊ {d}</li>
-                    ))}
-                  </ul>
+                    <ul className="space-y-1 text-[14px] leading-relaxed">
+                      {item.desc.map((d, i) => (
+                        <li key={i}>＊ {d}</li>
+                      ))}
+                    </ul>
 
-                  <div className="text-right mt-2">
-                    <button className="text-green-700 text-xs hover:underline">
-                      › read more
-                    </button>
+                    <div className="text-right mt-2">
+                      <button className="text-green-700 text-xs hover:underline">
+                        › read more
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
+          </div>
         </div>
       </div>
-    </div>
-</section>
+    </section>
   );
 }
