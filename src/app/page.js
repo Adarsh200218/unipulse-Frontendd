@@ -1,5 +1,5 @@
 // "use client";
-
+ 
 // import { useEffect, useState } from "react";
 // import { Omega } from "lucide-react";
 // import { api } from "./apis/apiList";
@@ -11,7 +11,7 @@
 //   removeUser,
 //   getUser,
 // } from "../helper/getCommonData";
-
+ 
 // export default function Home() {
 //   const [categories, setCategories] = useState([]);
 //   const [products, setProducts] = useState([]);
@@ -27,14 +27,14 @@
 //       setUserState(null);
 //     }
 //   }, []);
-
+ 
 //   const handleLogout = () => {
 //     removeToken();
 //     removeUser();
 //     setUserState(null);
 //     router.push("/");
 //   };
-
+ 
 //  useEffect(() => {
 //   const fetchData = async () => {
 //     try {
@@ -43,23 +43,23 @@
 //         headers: { Accept: "application/json" },
 //       });
 //       const catData = await catRes.json();
-
+ 
 //       const prodRes = await fetch(api.apiCall.productList, {
 //         cache: "no-store",
 //         headers: { Accept: "application/json" },
 //       });
 //       const prodData = await prodRes.json();
-
+ 
 //       if (catRes.ok) setCategories(catData.data || []);
 //       if (prodRes.ok) setProducts(prodData.data || []);
 //     } catch (err) {
 //       console.log("Error:", err);
 //     }
 //   };
-
+ 
 //   fetchData();
 //  }, [pathname]);
-  
+ 
 //   useEffect(() => {
 //   const handlePageShow = (event) => {
 //     if (event.persisted) {
@@ -67,23 +67,23 @@
 //       window.location.reload();
 //     }
 //   };
-
+ 
 //   window.addEventListener("pageshow", handlePageShow);
-
+ 
 //   return () => {
 //     window.removeEventListener("pageshow", handlePageShow);
 //   };
 // }, []);
-
+ 
 //   return (
 //     <section>
 //       <div className="flex flex-col lg:flex-row min-h-screen max-w-7xl mx-auto">
-
+ 
 //         {/* SIDEBAR */}
 //         <aside className="w-full lg:w-[400px] bg-white mt-4 lg:p-4 lg:mt-0">
 //           <div className="lg:sticky lg:top-20 max-h-[calc(100vh-80px)] overflow-auto">
 //             <div className="p-6 space-y-6 bg-green-800 text-white">
-
+ 
 //               <div className="bg-white text-black p-4 rounded shadow">
 //                 {!user ? (
 //                   <div className="flex flex-col gap-2">
@@ -112,16 +112,16 @@
 //                   </div>
 //                 )}
 //               </div>
-
+ 
 //               <div>
 //                 <h1 className="text-2xl font-bold">Download</h1>
 //                 <p className="text-sm mt-2">
 //                   Our most recent catalogue, manuals and dimensions can be downloaded.
 //                 </p>
 //               </div>
-
+ 
 //               <hr className="border-white/30" />
-
+ 
 //               <div>
 //                 <h3 className="text-2xl font-semibold mb-3">
 //                   List of Download Files
@@ -138,17 +138,17 @@
 //                   ))}
 //                 </div>
 //               </div>
-
+ 
 //             </div>
 //           </div>
 //         </aside>
-
+ 
 //         {/* MAIN */}
 //         <main className="flex-1 p-2 lg:p-4 mt-4">
 //           <h1 className="text-3xl font-semibold text-gray-800 uppercase">
 //             Download
 //           </h1>
-
+ 
 //           {categories.map((cat) => (
 //             <Section
 //               key={cat.id}
@@ -160,23 +160,23 @@
 //             />
 //           ))}
 //         </main>
-
+ 
 //       </div>
 //     </section>
 //   );
 // }
-
+ 
 // /* ================= TABLE ================= */
-
+ 
 // function Table({ products = [] }) {
 //   const router = useRouter();
 //   const [modal, setModal] = useState(null);
 //   const [loading, setLoading] = useState(false);
 //   const [downloading, setDownloading] = useState(false);
-
+ 
 //   const handleClick = async (type, productId) => {
 //     const token = getToken();
-
+ 
 //     if (!token) {
 //       localStorage.setItem(
 //         "action_after_login",
@@ -185,7 +185,7 @@
 //       router.push("/login");
 //       return;
 //     }
-
+ 
 //     setLoading(true);
 //     try {
 //       await fetch(api.apiCall.saveProductQuery, {
@@ -202,7 +202,7 @@
 //           price: type === "price" ? 1 : 0,
 //         }),
 //       });
-
+ 
 //       const res = await fetch(
 //         `${api.apiCall.productView}/${type}/${productId}`,
 //         {
@@ -212,14 +212,14 @@
 //           },
 //         }
 //       );
-
+ 
 //       if (res.status === 401) {
 //         removeToken();
 //         removeUser();
 //         router.push("/login");
 //         return;
 //       }
-
+ 
 //       const data = await res.json();
 //       setModal({ type, data: data.data });
 //     } catch (err) {
@@ -229,7 +229,7 @@
 //       setLoading(false);
 //     }
 //   };
-
+ 
 //   useEffect(() => {
 //     const stored = localStorage.getItem("action_after_login");
 //     if (stored && getToken()) {
@@ -238,7 +238,7 @@
 //       localStorage.removeItem("action_after_login");
 //     }
 //   }, []);
-
+ 
 //   const handleDownload = async (id) => {
 //     const token = getToken();
 //     setDownloading(true);
@@ -246,19 +246,19 @@
 //       const res = await fetch(`${api.apiCall.download}/${id}`, {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
-
+ 
 //       if (res.status === 401) {
 //         removeToken();
 //         removeUser();
 //         router.push("/login");
 //         return;
 //       }
-
+ 
 //       if (!res.ok) {
 //         alert("Download failed");
 //         return;
 //       }
-
+ 
 //       const blob = await res.blob();
 //       const url = window.URL.createObjectURL(blob);
 //       const a = document.createElement("a");
@@ -275,7 +275,7 @@
 //       setDownloading(false);
 //     }
 //   };
-
+ 
 //   return (
 //     <>
 //       <table className="w-full border text-sm mt-4 mb-12 shadow">
@@ -287,13 +287,13 @@
 //             <th className="border p-2">Price</th>
 //           </tr>
 //         </thead>
-
+ 
 //         <tbody>
 //           {products.length > 0 ? (
 //             products.map((item) => (
 //               <tr key={item.id}>
 //                 <td className="border p-2">{item.product_name}</td>
-
+ 
 //                 <td className="border p-2">
 //                   <div className="flex justify-center items-center">
 //                     <Omega
@@ -302,7 +302,7 @@
 //                     />
 //                   </div>
 //                 </td>
-
+ 
 //                 <td className="border p-2">
 //                   <div className="flex justify-center items-center">
 //                     <Omega
@@ -311,7 +311,7 @@
 //                     />
 //                   </div>
 //                 </td>
-
+ 
 //                 <td className="border p-2">
 //                   <div className="flex justify-center items-center">
 //                     <Omega
@@ -331,22 +331,22 @@
 //           )}
 //         </tbody>
 //       </table>
-
+ 
 //       {/* MODAL */}
 //       {modal && (
 //         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
 //           <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl space-y-4">
-
+ 
 //             <h2 className="text-xl font-bold text-green-700">
 //               {modal.data.product_name}
 //             </h2>
-
+ 
 //             {modal.type === "price" && (
 //               <p className="text-3xl text-green-600 font-semibold text-center">
 //                 ₹{modal.data.price}
 //               </p>
 //             )}
-
+ 
 //             {modal.type === "catalogue" && (
 //               <a
 //                 href={modal.data.catalogue_link}
@@ -357,7 +357,7 @@
 //                 View Catalogue →
 //               </a>
 //             )}
-
+ 
 //             {modal.type === "manual" && (
 //               <button
 //                 onClick={() => handleDownload(modal.data.download_id)}
@@ -367,23 +367,23 @@
 //                 {downloading ? "Downloading..." : "⬇ Download Manual PDF"}
 //               </button>
 //             )}
-
+ 
 //             <button
 //               onClick={() => setModal(null)}
 //               className="w-full border border-gray-300 hover:bg-gray-100 py-2 rounded-lg transition"
 //             >
 //               Close
 //             </button>
-
+ 
 //           </div>
 //         </div>
 //       )}
 //     </>
 //   );
 // }
-
+ 
 // /* ================= SECTION ================= */
-
+ 
 // function Section({ id, title, products }) {
 //   return (
 //     <div id={id} className="mt-10">
@@ -392,28 +392,45 @@
 //     </div>
 //   );
 // }
-
-
+ 
+ 
+// import { api } from "./apis/apiList";
+// import HomeClient from "./component/HomeClient";
+ 
+// export const dynamic = "force-dynamic";
+ 
+// export default async function Home() {
+//   const catRes = await fetch(api.apiCall.categoryList, {
+//     cache: "no-store",
+//   });
+//   const catData = await catRes.json();
+ 
+//   const prodRes = await fetch(api.apiCall.productList, {
+//     cache: "no-store",
+//   });
+//   const prodData = await prodRes.json();
+ 
+//   return (
+//     <HomeClient
+//       categories={catData.data || []}
+//       products={prodData.data || []}
+//     />
+//   )
+// }
 import { api } from "./apis/apiList";
 import HomeClient from "./component/HomeClient";
-
-export const dynamic = "force-dynamic";
-
+ 
 export default async function Home() {
-  const catRes = await fetch(api.apiCall.categoryList, {
-    cache: "no-store",
-  });
+  const catRes = await fetch(api.apiCall.categoryList, { cache: "no-store" });
   const catData = await catRes.json();
-
-  const prodRes = await fetch(api.apiCall.productList, {
-    cache: "no-store",
-  });
+ 
+  const prodRes = await fetch(api.apiCall.productList, { cache: "no-store" });
   const prodData = await prodRes.json();
-
+ 
   return (
     <HomeClient
       categories={catData.data || []}
       products={prodData.data || []}
     />
-  )
+  );
 }
