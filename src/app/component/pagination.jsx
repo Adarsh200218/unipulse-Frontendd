@@ -3,9 +3,25 @@
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
     if (totalPages <= 1) return null;
 
+    // 🔥 Show only nearby pages (current ±2)
+    const getPageNumbers = () => {
+        const pages = [];
+
+        for (
+            let i = Math.max(1, currentPage - 2);
+            i <= Math.min(totalPages, currentPage + 2);
+            i++
+        ) {
+            pages.push(i);
+        }
+
+        return pages;
+    };
+
     return (
         <div className="flex justify-end items-center gap-2 mt-6 mb-10">
 
+            {/* 🔙 Prev Button */}
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
@@ -14,17 +30,21 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
                 Prev
             </button>
 
-            {Array.from({ length: totalPages }, (_, i) => (
+            {/* 🔢 Page Numbers */}
+            {getPageNumbers().map((page) => (
                 <button
-                    key={i}
-                    onClick={() => onPageChange(i + 1)}
-                    className={`px-3 py-1 border rounded ${currentPage === i + 1 ? "bg-green-600 text-white" : "bg-white"
+                    key={page}
+                    onClick={() => onPageChange(page)}
+                    className={`px-3 py-1 border rounded ${currentPage === page
+                            ? "bg-green-600 text-white"
+                            : "bg-white"
                         }`}
                 >
-                    {i + 1}
+                    {page}
                 </button>
             ))}
 
+            {/* 🔜 Next Button */}
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}

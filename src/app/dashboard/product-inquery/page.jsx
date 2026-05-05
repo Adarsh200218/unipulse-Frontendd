@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { api } from "../../apis/apiList";
 import { getToken } from "../../../helper/getCommonData";
-import { Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
 import Pagination from "../../component/pagination";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function ProductQueryPage() {
     const [logs, setLogs] = useState([]);
@@ -13,20 +14,40 @@ export default function ProductQueryPage() {
     const [totalPages, setTotalPages] = useState(1);
     const itemsPerPage = 10;
     const [loading, setLoading] = useState(true);
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
+    const [selectedFilter, setSelectedFilter] = useState("");
+
 
     // ✅ FETCH with page param
     const fetchLogs = async (page = 1) => {
         setLoading(true);
         try {
-            const res = await fetch(`${api.apiCall.productQueryList}?page=${page}&per_page=${itemsPerPage}`, {
+            // ✅ Sab params ek saath
+            const params = new URLSearchParams({
+                page,
+                per_page: itemsPerPage,
+            });
+
+            if (selectedFilter) params.append(selectedFilter, 1);
+
+            if (startDate && endDate) {
+                params.append("start_date", startDate.toLocaleDateString("en-CA"));
+                params.append("end_date", endDate.toLocaleDateString("en-CA"));
+            }
+
+            const res = await fetch(`${api.apiCall.productQueryList}?${params}`, {
                 headers: {
                     Authorization: `Bearer ${getToken()}`,
                     Accept: "application/json",
                 },
             });
+
             const data = await res.json();
+            console.log("last_page:", data.pagination?.last_page); // 5 aana chahiye
             setLogs(Array.isArray(data.data) ? data.data : []);
-            setTotalPages(data.last_page || 1); // Laravel pagination
+            setTotalPages(data.pagination?.last_page || 1); // ✅
+
         } catch (err) {
             console.log("Error:", err);
         } finally {
@@ -37,7 +58,57 @@ export default function ProductQueryPage() {
     // ✅ Page change hone par refetch
     useEffect(() => {
         fetchLogs(currentPage);
-    }, [currentPage]);
+    }, [currentPage, selectedFilter, startDate, endDate]);
+
+    const handleDownload = async () => {
+        try {
+            const params = new URLSearchParams();
+            if (selectedFilter) params.append(selectedFilter, 1);
+
+            const response = await fetch(
+                `${api.apiCall.exportproductQuery}?${params}`,
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${getToken()}`,
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error("Download failed:", errText);
+                toast.error("Failed to download file!");
+                return;
+            }
+
+            const blob = await response.blob();
+
+            // ✅ Blob empty check
+            if (blob.size === 0) {
+                toast.error("File is empty, try again!");
+                return;
+            }
+
+            const url = window.URL.createObjectURL(blob);
+            const date = new Date().toISOString().split("T")[0];
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `product-queries-${date}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+
+            //  Cleanup delay 
+            setTimeout(() => {
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            }, 300);
+
+        } catch (error) {
+            console.error("Download error:", error);
+            toast.error("Something went wrong!");
+        }
+    };
 
     // ✅ DELETE
     const handleDelete = async (id) => {
@@ -68,11 +139,71 @@ export default function ProductQueryPage() {
 
     return (
         <>
+
             <div className="flex justify-between items-center mb-2">
                 <h2 className="text-2xl font-semibold text-white bg-green-700 px-4 py-2">
                     Product Inquiry
                 </h2>
+
+                {/* ✅ Right side Date Filter */}
+                <div className="flex items-center gap-2">
+
+                    {/* ✅ Dropdown Filter */}
+                    <select
+                        className="border px-3 py-2 rounded text-sm"
+                        value={selectedFilter}
+                        onChange={(e) => {
+                            setSelectedFilter(e.target.value);
+                            setCurrentPage(1);
+                        }}
+                    >
+                        <option value="">Select Option</option>
+                        <option value="catalogue">Catalogue</option>
+                        <option value="manual">Manual</option>
+                        <option value="price">Price</option>
+                    </select>
+
+
+                    {/* ✅ selectedFilter ya date range — koi bhi ho toh button dikhao */}
+                    {(selectedFilter || (startDate && endDate)) && (
+                        <button
+                            onClick={handleDownload}
+                            className="bg-green-600 text-white px-3 py-2 rounded text-sm"
+                        >
+                            ⬇ Download Excel
+                        </button>
+                    )}
+
+                    {/* Date Picker — same as before */}
+                    <DatePicker
+                        selectsRange={true}
+                        startDate={startDate}
+                        endDate={endDate}
+                        onChange={(update) => setDateRange(update)}
+                        isClearable={true}
+                        className="border px-3 py-2 rounded text-sm"
+                        placeholderText="Select date range"
+                        dateFormat="dd/MM/yyyy"
+                    />
+
+                    {startDate && endDate && (
+                        <span className="text-sm font-medium text-gray-700">
+                            {startDate.toLocaleDateString("en-IN")} → {endDate.toLocaleDateString("en-IN")}
+                        </span>
+                    )}
+
+                    <button
+                        onClick={() => {
+                            setCurrentPage(1);
+                            fetchLogs(1); // ✅ already sahi hai
+                        }}
+                        className="bg-green-600 text-white px-3 py-1 rounded text-sm"
+                    >
+                        Filter
+                    </button>
+                </div>
             </div>
+
 
             <table className="w-full border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow-lg">
                 <thead className="bg-[#b3ffd3]">
@@ -84,7 +215,7 @@ export default function ProductQueryPage() {
                         <th className="border px-4 py-2 text-center">Manual</th>
                         <th className="border px-4 py-2 text-center">Price</th>
                         <th className="border px-4 py-2 text-center">Date</th>
-                        <th className="border px-4 py-2 text-center">Action</th>
+                        {/* <th className="border px-4 py-2 text-center">Action</th> */}
                     </tr>
                 </thead>
 
@@ -150,15 +281,15 @@ export default function ProductQueryPage() {
                                     {new Date(log.created_at).toLocaleString("en-IN")}
                                 </td>
 
-                                {/* Action */}
-                                <td className="border p-2 text-center">
+                                {/*Delete Pencil Icon*/}
+                                {/* <td className="border p-2 text-center">
                                     <button
                                         onClick={() => handleDelete(log.id)}
                                         className="bg-red-500 text-white px-3 py-2 rounded"
                                     >
                                         <Trash2 size={16} />
                                     </button>
-                                </td>
+                                </td> */}
 
                             </tr>
                         ))

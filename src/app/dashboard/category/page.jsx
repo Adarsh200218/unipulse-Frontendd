@@ -25,7 +25,7 @@ export default function CategoryListPage() {
 
         try {
             const res = await fetch(
-                `${api.apiCall.categoryList}?status=1page=${page}&per_page=${itemsPerPage}`,
+                `${api.apiCall.categoryList}?status=1&page=${page}&per_page=${itemsPerPage}`,
                 {
                     headers: {
                         Authorization: `Bearer ${getToken()}`,
@@ -98,6 +98,7 @@ export default function CategoryListPage() {
                         <th className="border px-4 py-2 text-center">S.No</th>
                         <th className="border p-2 text-left">Category Title</th>
                         <th className="border p-2">Description</th>
+                        {/* <th className="border p-2 text-left">Category Image</th> */}
                         <th className="border p-2">Status</th>
                         <th className="border p-2">Action</th>
                     </tr>
@@ -106,17 +107,32 @@ export default function CategoryListPage() {
                 <tbody>
                     {categories.length > 0 ? (
                         categories.map((item, index) => (
+
                             <tr key={item.id} className="hover:bg-gray-50">
 
                                 <td className="border px-4 py-2 text-center">
                                     {(currentPage - 1) * itemsPerPage + index + 1}
                                 </td>
+                                {/* {console.log(item.images)}
+                                {console.log(`${api.image.imageURL}${item.images?.[0]?.image_url}`)} */}
 
                                 <td className="border p-2">{item.title}</td>
 
                                 <td className="border p-2 text-center">
                                     {item.description || "-"}
                                 </td>
+
+                                {/* <td>
+                                    {item.images?.length > 0 && item.images[0]?.image_url ? (
+                                        <img
+                                            src={`${api.image.imageURL}${item.images[0].image_url}`}
+                                            width="60"
+                                        />
+                                    ) : (
+                                        "No Image"
+                                    )}
+                                </td> */}
+
 
                                 <td className="border p-2 text-center">
                                     <span className={`px-2 py-1 rounded-full text-xs ${item.status == 1

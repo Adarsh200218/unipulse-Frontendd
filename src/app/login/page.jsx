@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { api } from "../apis/apiList";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 import {
   setToken,
   setUser,
@@ -20,12 +23,34 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [showResend, setShowResend] = useState(false);
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  // const [resendLoading, setResendLoading] = useState(false);
+  // const [resendSuccess, setResendSuccess] = useState(false);
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     general: "",
   });
+  useEffect(() => {
+    if (searchParams.get("verified") === "true") {
+      toast.success("Email verified successfully! You can login now.");
+    }
+  }, []);
+
+  // ✅ Yeh rakho
+  useEffect(() => {
+    if (searchParams.get("verified") === "true") {
+      toast.success("Email verified successfully! You can login now.");
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   if (searchParams.get("error") === "expired") {
+  //     toast.error("Verification link expired. Please request a new one.");
+  //   }
+  // }, []);
 
   const router = useRouter();
 
@@ -67,17 +92,18 @@ export default function LoginForm() {
 
       const data = await response.json();
 
-      // ❌ LOGIN FAILED
       if (!response.ok) {
-        const msg = (data?.message || "").toLowerCase();
-        let error = "Invalid login details.";
+        let error = data?.error || "Invalid email or password.";
 
-        if (msg.includes("inactive")) {
-          error = "Your account is inactive.";
-        } else if (msg.includes("password") && !msg.includes("email")) {
-          error = "Wrong password.";
-        } else if (msg.includes("email") && !msg.includes("password")) {
-          error = "Wrong email.";
+        if (data?.code === "NOT_VERIFIED") {
+          // setShowResend(true);
+          error = "Your email is not verified. Please verify your email.";
+        }
+        else if (data?.code === "INACTIVE") {
+          error = "Your account is inactive. Please contact admin.";
+        }
+        else if (data?.code === "INVALID_CREDENTIALS") {
+          error = "Invalid email or password.";
         }
 
         setErrors((prev) => ({ ...prev, general: error }));
@@ -112,9 +138,9 @@ export default function LoginForm() {
 
       // 🔴 ADMIN
       if (data.user.role_id === 1) {
-        router.replace("/dashboard");
+        router.replace("/dashboard/product-inquery");
       } else {
-        router.replace("/");
+        router.replace("/products-list");
       }
     } catch (err) {
       setErrors((prev) => ({ ...prev, general: err.message }));
@@ -122,6 +148,42 @@ export default function LoginForm() {
       setLoading(false);
     }
   };
+
+  // const handleResend = async () => {
+  //   if (!email) {
+  //     setErrors((prev) => ({
+  //       ...prev,
+  //       general: "Enter your email first",
+  //     }));
+  //     return;
+  //   }
+
+  //   setResendLoading(true);  // ✅ loader start
+  //   setResendSuccess(false);
+
+  //   const res = await fetch(api.apiCall.resendVerficationEmail, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ email }),
+  //   });
+
+  //   const data = await res.json();
+  //   setResendLoading(false);  // ✅ loader stop
+
+  //   if (!res.ok) {
+  //     setErrors((prev) => ({
+  //       ...prev,
+  //       general: data.message,
+  //     }));
+  //     return;
+  //   }
+
+  //   setResendSuccess(true);   // ✅ success state
+  //   toast.success("Verification email sent again! Please check your inbox.");
+  //   setShowResend(false);
+  // };
 
   return (
     <section>
@@ -180,6 +242,49 @@ export default function LoginForm() {
                 {errors.general}
               </p>
             )}
+
+            {/* {showResend && (
+              <div className="text-center mt-2">
+                <button
+                  type="button"
+                  onClick={handleResend}
+                  disabled={resendLoading}
+                  className="text-blue-600 underline text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {resendLoading ? (
+                    <span className="flex items-center gap-1 justify-center">
+                      <svg
+                        className="animate-spin h-4 w-4 text-blue-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12" cy="12" r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8z"
+                        />
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    "Resend Verification Email"
+                  )}
+                </button>
+
+                {resendSuccess && (
+                  <p className="text-green-600 text-xs mt-1">
+                    ✅ Email sent! Please check your inbox.
+                  </p>
+                )}
+              </div>
+            )} */}
 
             {/* BUTTON */}
             <button

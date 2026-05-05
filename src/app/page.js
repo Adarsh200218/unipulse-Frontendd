@@ -417,20 +417,71 @@
 //     />
 //   )
 // }
+// import { api } from "./apis/apiList";
+// import HomeClient from "./component/HomeClient";
+ 
+// export default async function Home() {
+//   const catRes = await fetch(api.apiCall.categoryList, { cache: "no-store" });
+//   const catData = await catRes.json();
+ 
+//   const prodRes = await fetch(api.apiCall.productList, { cache: "no-store" });
+//   const prodData = await prodRes.json();
+ 
+//   return (
+//     <HomeClient
+//       categories={catData.data || []}
+//       products={prodData.data || []}
+//     />
+//   );
+// }
+
+// import { api } from "./apis/apiList";
+// import CategorySidebar from "../app/component/homePageSideBar";
+
+// export default async function Home() {
+//   const catRes = await fetch(api.apiCall.categoryList, { cache: "no-store" });
+//   const catData = await catRes.json();
+
+//   return (
+//     <div className="flex max-w-7xl mx-auto">
+
+//       {/* LEFT */}
+//       <CategorySidebar categories={catData.data || []} />
+
+//       {/* RIGHT */}
+//       <div className="flex-1 p-6">
+//         <h2 className="text-2xl mb-4">Product Categories</h2>
+
+//         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+//           {(catData.data || []).map((item) => (
+//             <a
+//               key={item.id}
+//               href={`/products/${item.id}`}
+//               className="border p-4 text-center hover:shadow"
+//             >
+//               <img
+//                 src={item.image || "/images/default.png"}
+//                 className="h-20 mx-auto mb-2"
+//               />
+//               <p>{item.title}</p>
+//             </a>
+//           ))}
+//         </div>
+//       </div>
+
+//     </div>
+//   );
+// }
+
 import { api } from "./apis/apiList";
-import HomeClient from "./component/HomeClient";
- 
-export default async function Home() {
-  const catRes = await fetch(api.apiCall.categoryList, { cache: "no-store" });
-  const catData = await catRes.json();
- 
-  const prodRes = await fetch(api.apiCall.productList, { cache: "no-store" });
-  const prodData = await prodRes.json();
- 
-  return (
-    <HomeClient
-      categories={catData.data || []}
-      products={prodData.data || []}
-    />
-  );
+import Home from "../app/component/home";
+
+export default async function Page() {
+  const res = await fetch(api.apiCall.categoryList, {
+    cache: "no-store",
+  });
+
+  const data = await res.json();
+
+  return <Home categories={data.data || []} />;
 }

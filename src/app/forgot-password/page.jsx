@@ -13,7 +13,7 @@ export default function ForgotPasswordPage() {
     const [errors, setErrors] = useState({ email: "", general: "" });
 
     const searchParams = useSearchParams();
-    const token = searchParams.get("restToken"); // ✅ same naming
+    const token = searchParams.get("restToken");
     const router = useRouter();
 
     // ================= SEND RESET LINK =================

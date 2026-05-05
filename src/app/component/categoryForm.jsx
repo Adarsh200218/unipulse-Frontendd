@@ -18,6 +18,8 @@ export default function CategoryForm({ id = null }) {
         status: 1,
     });
 
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(false);
 
     //  HANDLE INPUT
@@ -25,6 +27,16 @@ export default function CategoryForm({ id = null }) {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    // IMAGE HANDLE
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
+    };
+
 
     //  FETCH DATA FOR EDIT
     const fetchCategory = async () => {
@@ -47,6 +59,13 @@ export default function CategoryForm({ id = null }) {
                     description: data.description || "",
                     status: data.status ?? 1,
                 });
+
+                // OLD IMAGE SET KARO
+                if (data.images && data.images.length > 0) {
+                    setImagePreview(
+                        `${api.image.imageURL}${data.images[0].image_url}`
+                    );
+                }
             }
 
         } catch (err) {
@@ -69,19 +88,33 @@ export default function CategoryForm({ id = null }) {
                 ? `${api.apiCall.categoryUpdate}/${id}`
                 : api.apiCall.categoryADD;
 
-            const method = id ? "PUT" : "POST";
+            const method = "POST"; // 🔥 always POST
+
+            const payload = new FormData();
+            payload.append("title", formData.title);
+            payload.append("description", formData.description);
+            payload.append("status", formData.status);
+
+            if (id) {
+                payload.append("_method", "PUT");
+            }
+
+            if (imageFile) {
+                payload.append("image", imageFile);
+            }
 
             const res = await fetch(url, {
                 method: method,
                 headers: {
-                    "Content-Type": "application/json",
+                    // "Content-Type": "application/json",
                     Accept: "application/json",
                     Authorization: `Bearer ${getToken()}`,
                 },
-                body: JSON.stringify({
-                    id: id,
-                    ...formData,
-                }),
+                body: payload,
+                // body: JSON.stringify({
+                //     id: id,
+                //     ...formData,
+                // }),
             });
 
             const json = await res.json();
@@ -127,6 +160,29 @@ export default function CategoryForm({ id = null }) {
                             className={inputClass}
                             required
                         />
+                    </div>
+
+                    {/*  IMAGE FIELD */}
+                    <div>
+                        <label className="block mb-2 font-medium">Image</label>
+                        <input
+                            type="file"
+                            accept="image/jpeg,image/png,image/jpg,image/webp"
+                            onChange={handleImageChange}
+                            className={inputClass}
+
+                        />
+
+                        {/* 👇 PREVIEW */}
+                        {imagePreview && (
+                            <div className="mt-3">
+                                <img
+                                    src={imagePreview}
+                                    alt="Preview"
+                                    className="w-full h-48 object-cover rounded-xl border border-gray-300"
+                                />
+                            </div>
+                        )}
                     </div>
 
                     {/* DESCRIPTION */}

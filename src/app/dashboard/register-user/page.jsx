@@ -45,6 +45,34 @@ export default function RegisterUser() {
         fetchUsers(currentPage);
     }, [currentPage]);
 
+    const toggleStatus = async (id, currentStatus) => {
+        try {
+            const res = await fetch(`${api.apiCall.userUpdate}${id}`, {
+                method: 'PUT', // ya PUT (API ke hisaab se)
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    status: currentStatus == 1 ? 0 : 1
+                })
+            });
+
+            const json = await res.json();
+
+            if (res.ok) {
+                toast.success('Status updated');
+                fetchUsers(currentPage); // reload list
+            } else {
+                toast.error(json.message || 'Error');
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error('Server error');
+        }
+    };
+
     // 🔥 DELETE
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this user?')) return;
@@ -99,7 +127,8 @@ export default function RegisterUser() {
                         <th className="border px-4 py-2 text-center">Company Name</th>
                         <th className="border px-4 py-2 text-center">Address</th>
                         <th className="border px-4 py-2 text-center">Country</th>
-                        <th className="border px-4 py-2 text-center">Status</th>
+                        <th className="border px-4 py-2 text-center">User Verified</th>
+                        <th className="border px-4 py-2 text-center">User Status</th>
                         {/* <th className="border px-4 py-2 text-center">Action</th> */}
                     </tr>
                 </thead>
@@ -117,14 +146,27 @@ export default function RegisterUser() {
                                 <td className="border px-4 py-2 text-center">{user.company_name}</td>
                                 <td className="border px-4 py-2 text-center">{user.address}</td>
                                 <td className="border px-4 py-2 text-center">{user.country}</td>
-
-                                {/* Status */}
                                 <td className="border px-4 py-2 text-center">
-                                    <span className={`px-2 py-1 rounded-full text-xs ${user.status == 1
-                                        ? 'bg-green-100 text-green-800'
-                                        : 'bg-red-100 text-red-600'
+                                    <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${user.email_verified_at
+                                        ? 'bg-green-100 text-green-700 border-green-300'
+                                        : 'bg-yellow-100 text-yellow-700 border-yellow-300'
                                         }`}>
-                                        {user.status == 1 ? 'Active' : 'Inactive'}
+                                        {user.email_verified_at
+                                            ? '✓ Verified'
+                                            : '⏳ Pending'}
+                                    </span>
+                                </td>
+
+                                <td className="border px-4 py-2 text-center">
+                                    <span
+                                        onClick={() => toggleStatus(user.id, user.status)}
+                                        title={user.status == 1 ? "Click to deactivate" : "Click to activate"}
+                                        className={`cursor-pointer px-3 py-1 rounded-full text-xs font-semibold border transition-all duration-200 hover:opacity-75 active:scale-95 select-none ${user.status == 1
+                                            ? 'bg-green-100 text-green-700 border-green-300 hover:bg-green-200'
+                                            : 'bg-red-100 text-red-600 border-red-300 hover:bg-red-200'
+                                            }`}
+                                    >
+                                        {user.status == 1 ? '● Active' : '● Inactive'}
                                     </span>
                                 </td>
 

@@ -203,3 +203,18 @@ export function getRedirectPath() {
 export function removeRedirectPath() {
   localStorage.removeItem("redirect_after_login");
 }
+
+export const slugify = (text) =>
+  text.toLowerCase().replace(/\s+/g, "-"); // funciton for URL mai naam deikhe product ka category par click wise
+
+export function useAdminGuardAdmin() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const user = getUser();
+
+    if (user?.role_id === 1) {
+      router.replace("/dashboard/product-inquery");
+    }
+  }, [router]);
+}

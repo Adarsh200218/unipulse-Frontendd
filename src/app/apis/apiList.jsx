@@ -27,7 +27,10 @@ export const api = {
         viewManual: `${BASE_URL}download`,
         saveProductQuery: `${BASE_URL}product-query/save`,
         productQueryList: `${BASE_URL}product-query/all`,
-        deleteQuery: `${BASE_URL}product-query`
+        exportproductQuery: `${BASE_URL}product-query/export`,
+        deleteQuery: `${BASE_URL}product-query`,
+        resendVerficationEmail: `${BASE_URL}resend-verification`,
+        verifyEmail: `${BASE_URL}verify-email`,
     },
 
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Omega } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { slugify, useAdminGuardAdmin } from "../../helper/getCommonData";
 import { api } from "../apis/apiList";
 import {
     getToken,
@@ -12,6 +13,7 @@ import {
 } from "../../helper/getCommonData";
 
 export default function HomeClient({ categories, products }) {
+    useAdminGuardAdmin();
 
     const [user, setUserState] = useState(null);
     const router = useRouter();
@@ -79,7 +81,8 @@ export default function HomeClient({ categories, products }) {
                                     {categories.map((item) => (
                                         <a
                                             key={item.id}
-                                            href={`#${item.id}`}
+                                            // href={`#${item.id}`}
+                                            href={`#${slugify(item.title)}`}
                                             className="text-sm font-semibold border px-2 py-1 rounded bg-white text-black hover:bg-amber-200"
                                         >
                                             ▸ {item.title}
@@ -115,11 +118,13 @@ export default function HomeClient({ categories, products }) {
     );
 }
 
-/* ================= SECTION ================= */
+/* ================= SECTION ================= */  ///// Scroll hota hai yeh category list par dabane se products table par scroll hota hai category kai according
 
 function Section({ id, title, products }) {
     return (
-        <div id={id} className="mt-10">
+        // <div id={id} className="mt-10">
+        // <div id={id} className="mt-10 scroll-mt-24">
+        <div id={slugify(title)} className="mt-10 scroll-mt-24">
             <h2 className="bg-green-700 text-white p-2">{title}</h2>
             <Table products={products} />
         </div>
@@ -130,8 +135,7 @@ function Section({ id, title, products }) {
 
 function Table({ products }) {
     const router = useRouter();
-    const [modal, setModal] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [modal, setModal] = useState(null); // { type, data, loading, error }
     const [downloading, setDownloading] = useState(false);
 
     const handleClick = async (type, productId) => {
@@ -146,7 +150,9 @@ function Table({ products }) {
             return;
         }
 
-        setLoading(true);
+        // Turant modal open karo loader ke saath
+        setModal({ type, data: null, loading: true, error: false });
+
         try {
             await fetch(api.apiCall.saveProductQuery, {
                 method: "POST",
@@ -181,11 +187,10 @@ function Table({ products }) {
             }
 
             const data = await res.json();
-            setModal({ type, data: data.data });
+            setModal({ type, data: data.data, loading: false, error: false });
         } catch (err) {
             console.error("Error:", err);
-        } finally {
-            setLoading(false);
+            setModal({ type, data: null, loading: false, error: true });
         }
     };
 
@@ -277,39 +282,62 @@ function Table({ products }) {
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
                     <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl space-y-4">
 
-                        <h2 className="text-xl font-bold text-green-700">
-                            {modal.data.product_name}
-                        </h2>
+                        {modal.loading ? (
+                            /* ── LOADER ── */
+                            <div className="flex flex-col items-center justify-center py-8 space-y-3">
+                                <div className="w-10 h-10 border-4 border-green-200 border-t-green-600 rounded-full animate-spin" />
+                                <p className="text-sm text-gray-400">Please wait...</p>
+                            </div>
+                        ) : modal.error ? (
+                            /* ── ERROR ── */
+                            <div className="text-center py-6 text-red-500">
+                                <p>Please Try Again</p>
+                            </div>
+                        ) : (
+                            /* ── DATA ── */
+                            <>
+                                <h2 className="text-xl font-bold text-green-700">
+                                    {modal.data.product_name}
+                                </h2>
 
-                        {modal.type === "price" && (
-                            <p className="text-3xl text-green-600 text-center">
-                                ₹{Number(modal.data.price).toLocaleString("en-IN")}
-                            </p>
+                                {modal.type === "price" && (
+                                    <p className="text-3xl text-green-600 text-center">
+                                        ₹{modal.data.price}
+                                    </p>
+                                )}
+
+                                {modal.type === "catalogue" && (
+                                    <a
+                                        href={modal.data.catalogue_link}
+                                        target="_blank"
+                                        onClick={() => setModal(null)}
+
+                                        className="block text-center bg-green-600 text-white px-5 py-2 rounded"
+                                    >
+                                        View Catalogue →
+                                    </a>
+                                )}
+
+                                {modal.type === "manual" && (
+                                    <button
+                                        onClick={() => {
+                                            setModal(null);           // 👈 modal close
+                                            handleDownload(modal.data.download_id); // 👈 download start
+                                        }}
+
+                                        disabled={downloading}
+                                        className="w-full bg-green-600 text-white px-5 py-2 rounded"
+                                    >
+                                        {downloading ? "Downloading..." : "Download Manual"}
+                                    </button>
+                                )}
+                            </>
                         )}
 
-                        {modal.type === "catalogue" && (
-                            <a
-                                href={modal.data.catalogue_link}
-                                target="_blank"
-                                className="block text-center bg-green-600 text-white px-5 py-2 rounded"
-                            >
-                                View Catalogue →
-                            </a>
-                        )}
-
-                        {modal.type === "manual" && (
-                            <button
-                                onClick={() => handleDownload(modal.data.download_id)}
-                                disabled={downloading}
-                                className="w-full bg-green-600 text-white px-5 py-2 rounded"
-                            >
-                                {downloading ? "Downloading..." : "Download Manual"}
-                            </button>
-                        )}
-
+                        {/* Close button hamesha visible */}
                         <button
                             onClick={() => setModal(null)}
-                            className="w-full border py-2 rounded"
+                            className="w-full border py-2 rounded text-gray-600"
                         >
                             Close
                         </button>
