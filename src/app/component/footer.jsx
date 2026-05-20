@@ -10,23 +10,23 @@ export default function Footer() {
             <li>
               <Link href="/">Home</Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/">Product Information</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/">Corporate Information</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/">Site Map</Link>
+            </li> */}
+            <li>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </li>
             <li>
-              <Link href="/">Privacy Policy</Link>
+              <Link href="/term-of-use">Terms of Use</Link>
             </li>
             <li>
-              <Link href="/">Terms of Use</Link>
-            </li>
-            <li>
-              <Link href="/">Contact Us</Link>
+              <Link href="/contact-us">Contact Us</Link>
             </li>
           </ul>
         </div>
@@ -35,9 +35,10 @@ export default function Footer() {
       {/* Copyright Section */}
       <div className="color-green text-gray-300 text-sm py-4">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2">
-          
+
           <p>
-            © 2018 UNIPULSE INSTRUMENTS. All Rights Reserved.
+            © {new Date().getFullYear()} UNIPULSE INSTRUMENTS. All Rights Reserved.
+
           </p>
 
           <p>
@@ -54,6 +55,6 @@ export default function Footer() {
         </div>
       </div>
     </>
-    
+
   );
 }

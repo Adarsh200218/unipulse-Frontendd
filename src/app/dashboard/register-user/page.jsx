@@ -120,13 +120,14 @@ export default function RegisterUser() {
                 <thead className="bg-[#b3ffd3]">
                     <tr>
                         <th className="border px-4 py-2 text-center">S.No</th>
-                        <th className="border px-4 py-2 text-left">First Name</th>
-                        <th className="border px-4 py-2 text-left">Last Name</th>
+                        <th className="border px-4 py-2 text-left">Name</th>
+                        {/* <th className="border px-4 py-2 text-left">Last Name</th> */}
                         <th className="border px-4 py-2 text-left">Email</th>
                         <th className="border px-4 py-2 text-left">Contact No</th>
                         <th className="border px-4 py-2 text-center">Company Name</th>
                         <th className="border px-4 py-2 text-center">Address</th>
-                        <th className="border px-4 py-2 text-center">Country</th>
+                        <th className="border px-4 py-2 text-center">Other Information</th>
+                        {/* <th className="border px-4 py-2 text-center">Country</th> */}
                         <th className="border px-4 py-2 text-center">User Verified</th>
                         <th className="border px-4 py-2 text-center">User Status</th>
                         {/* <th className="border px-4 py-2 text-center">Action</th> */}
@@ -140,12 +141,36 @@ export default function RegisterUser() {
                                     {(currentPage - 1) * itemsPerPage + index + 1}
                                 </td>
                                 <td className="border px-4 py-2">{user.name}</td>
-                                <td className="border px-4 py-2">{user.last_name}</td>
+                                {/* <td className="border px-4 py-2">{user.last_name}</td> */}
                                 <td className="border px-4 py-2">{user.email}</td>
                                 <td className="border px-4 py-2">{user.phone}</td>
-                                <td className="border px-4 py-2 text-center">{user.company_name}</td>
-                                <td className="border px-4 py-2 text-center">{user.address}</td>
-                                <td className="border px-4 py-2 text-center">{user.country}</td>
+                                <td className="border px-4 py-2 text-center">
+                                    {user.company_name ? (
+                                        user.company_name
+                                    ) : (
+                                        <span className="text-gray-600 italic">
+                                            Not Provided
+                                        </span>
+                                    )}
+                                </td>
+                                <td className="border px-4 py-2 text-center"> {user.address ? (
+                                    user.address
+                                ) : (
+                                    <span className="text-gray-600 italic">
+                                        Not Provided
+                                    </span>
+                                )}
+                                </td>
+
+                                <td className="border px-4 py-2 text-center"> {user.other_info ? (
+                                    user.other_info
+                                ) : (
+                                    <span className="text-gray-600 italic">
+                                        Not Provided
+                                    </span>
+                                )}
+                                </td>
+                                {/* <td className="border px-4 py-2 text-center">{user.country}</td> */}
                                 <td className="border px-4 py-2 text-center">
                                     <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${user.email_verified_at
                                         ? 'bg-green-100 text-green-700 border-green-300'

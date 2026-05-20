@@ -729,8 +729,8 @@ export default function ProductForm({ productId = null }) {
                         <label className="block text-gray-700 mb-2 font-medium">
                             Price
                         </label>
-                        <input
-                            type="text"
+                        <textarea
+                            // type="text"
                             name="price"
                             value={formData.price}
                             onChange={(e) => {
@@ -739,6 +739,7 @@ export default function ProductForm({ productId = null }) {
                             }}
                             className={errors.price ? inputErrorClass : inputClass}
                             placeholder="Price"
+                            rows={5}
                             required
                         />
                         {errors.price && (

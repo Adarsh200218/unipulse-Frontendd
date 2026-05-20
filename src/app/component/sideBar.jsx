@@ -201,6 +201,28 @@ export default function Sidebar() {
                             ▸ Product Inquery
                         </div>
 
+
+                        <div
+                            onClick={() => router.push("/dashboard/requested-proposal")}
+                            className={`text-sm font-semibold border px-2 py-3 rounded cursor-pointer transition ${pathname.startsWith("/dashboard/requested-proposal")
+                                ? "bg-green-600 text-black"
+                                : "bg-white text-black hover:bg-amber-200"
+                                }`}
+                        >
+                            ▸ Requested Proposal
+                        </div>
+
+
+                        <div
+                            onClick={() => router.push("/dashboard/homepage-content")}
+                            className={`text-sm font-semibold border px-2 py-3 rounded cursor-pointer transition ${pathname.startsWith("/dashboard/homepage-content")
+                                ? "bg-green-600 text-black"
+                                : "bg-white text-black hover:bg-amber-200"
+                                }`}
+                        >
+                            ▸ Homepage Content
+                        </div>
+
                     </div>
                 </div>
 

@@ -170,6 +170,7 @@ export default function CategoryForm({ id = null }) {
                             accept="image/jpeg,image/png,image/jpg,image/webp"
                             onChange={handleImageChange}
                             className={inputClass}
+                            required={!id}
 
                         />
 

@@ -147,7 +147,7 @@ export default function CategoryListPage() {
                                     <div className="flex justify-center gap-2">
 
                                         <Link href={`/dashboard/category/edit/${item.id}`}>
-                                            <button className="bg-blue-700 text-white px-3 py-2 rounded">
+                                            <button className="bg-blue-700 text-white px-3 py-2 rounded cursor-pointer">
                                                 <Pencil size={16} />
                                             </button>
                                         </Link>

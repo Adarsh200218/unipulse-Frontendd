@@ -161,6 +161,7 @@ export default function ProductQueryPage() {
                         <option value="catalogue">Catalogue</option>
                         <option value="manual">Manual</option>
                         <option value="price">Price</option>
+
                     </select>
 
 
@@ -214,6 +215,7 @@ export default function ProductQueryPage() {
                         <th className="border px-4 py-2 text-center">Catalogue</th>
                         <th className="border px-4 py-2 text-center">Manual</th>
                         <th className="border px-4 py-2 text-center">Price</th>
+                        {/* <th className="border px-4 py-2 text-center">Proposal</th> */}
                         <th className="border px-4 py-2 text-center">Date</th>
                         {/* <th className="border px-4 py-2 text-center">Action</th> */}
                     </tr>
@@ -222,7 +224,7 @@ export default function ProductQueryPage() {
                 <tbody>
                     {loading ? (
                         <tr>
-                            <td colSpan="8" className="text-center p-4">Loading...</td>
+                            <td colSpan="9" className="text-center p-4">Loading...</td>
                         </tr>
                     ) : logs.length > 0 ? (
                         logs.map((log, i) => (
@@ -276,6 +278,17 @@ export default function ProductQueryPage() {
                                     )}
                                 </td>
 
+                                {/* Proposal */}
+                                {/* <td className="border px-4 py-2 text-center">
+                                    {log.proposal ? (
+                                        <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold">
+                                            ✓ Yes
+                                        </span>
+                                    ) : (
+                                        <span className="text-gray-400">—</span>
+                                    )}
+                                </td> */}
+
                                 {/* Date */}
                                 <td className="border px-4 py-2 text-center text-xs text-gray-500">
                                     {new Date(log.created_at).toLocaleString("en-IN")}
@@ -295,7 +308,7 @@ export default function ProductQueryPage() {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="8" className="text-center p-4">No Inquiry found</td>
+                            <td colSpan="9" className="text-center p-4">No Inquiry found</td>
                         </tr>
                     )}
                 </tbody>

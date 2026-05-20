@@ -1,92 +1,80 @@
-// "use client";
-
-// import Link from "next/link";
-
-// export default function CategorySidebar({ categories }) {
-//     return (
-//         <aside className="w-full lg:w-[380px] bg-white mt-4 lg:p-4 lg:mt-0">
-//             <div className="p-6 bg-green-800 text-white rounded">
-
-//                 <h2 className="text-xl font-bold mb-4">Categories</h2>
-
-//                 <div className="flex flex-col gap-2">
-//                     {categories.map((item) => (
-//                         <Link
-//                             key={item.id}
-//                             href={`/products/${item.id}`}
-//                             className="bg-white text-black px-3 py-2 rounded hover:bg-amber-200"
-//                         >
-//                             ▸ {item.title}
-//                         </Link>
-//                     ))}
-//                 </div>
-
-//             </div>
-//         </aside>
-//     );
-// }
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { api } from "../apis/apiList"; // ✅ FIXED PATH
+import { useRouter } from "next/navigation";
+import { api } from "../apis/apiList";
+import { ChevronsRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function Home({ categories }) {
-    // const [user, setUser] = useState(null);
+    const router = useRouter();
+    const [bannerSlides, setBannerSlides] = useState([]);
+    const [aboutData, setAboutData] = useState(null);
+    const fetchBanner = async () => {
 
-    // const handleLogin = () => {
-    //     setUser({ name: "Pooja" });
-    // };
+        try {
 
-    // const handleRegister = () => {
-    //     setUser({ name: "New User" });
-    // };
+            const res = await fetch(
+                api.apiCall.getBanners
+            );
 
-    // const handleLogout = () => {
-    //     setUser(null);
-    // };
+            const json = await res.json();
+
+            if (json.status) {
+
+                setBannerSlides(json.data);
+            }
+
+        } catch (err) {
+
+            console.log(err);
+        }
+    };
+    const fetchAbout = async () => {
+
+        try {
+
+            const res = await fetch(
+                api.apiCall.getAbout
+            );
+
+            const json = await res.json();
+
+            if (json.status) {
+
+                setAboutData(json.data[0]);
+            }
+
+        } catch (err) {
+
+            console.log(err);
+        }
+    };
+    useEffect(() => {
+
+        fetchBanner();
+        fetchAbout();
+
+    }, []);
+    // const bannerSlides = [
+    //     "/images/slider1.jpg",
+    //     "/images/slider2.jpg",
+    //     "/images/slider3.jpg",
+    //     "/images/slidernew.jpg",
+    // ];
 
     return (
-        <section>
-            <div className="flex flex-col lg:flex-row min-h-screen max-w-7xl mx-auto">
+        <section className="pt-6">
+            <div className="flex flex-col lg:flex-row min-h-screen max-w-[1400px] mx-auto gap-4">
 
                 {/* ================= SIDEBAR ================= */}
-                <aside className="w-full lg:w-[380px] bg-white mt-4 lg:p-4 lg:mt-0">
-                    <div className="lg:sticky lg:top-20 max-h-[calc(100vh-80px)] overflow-auto">
-
-                        <div className="p-6 space-y-6 bg-green-800 text-white rounded">
-
-                            {/* AUTH */}
-                            {/* <div className="bg-white text-black p-4 rounded shadow">
-                                {!user ? (
-                                    <div className="flex flex-col gap-2">
-                                        <button
-                                            onClick={handleLogin}
-                                            className="bg-green-600 text-white py-2 rounded hover:bg-green-800"
-                                        >
-                                            Login
-                                        </button>
-
-                                        <button
-                                            onClick={handleRegister}
-                                            className="bg-blue-600 text-white py-2 rounded hover:bg-blue-800"
-                                        >
-                                            Register
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="text-center space-y-2">
-                                        <p className="font-semibold">{user.name}</p>
-
-                                        <button
-                                            onClick={handleLogout}
-                                            className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-800"
-                                        >
-                                            Logout
-                                        </button>
-                                    </div>
-                                )}
-                            </div> */}
+                <aside className="w-full lg:w-[320px] bg-white mt-4 lg:p-4 lg:mt-0 shrink-0">
+                    <div className="lg:sticky lg:top-20 h-[calc(100vh-80px)] overflow-hidden">
+                        <div className="p-6 space-y-6 bg-green-800 text-white rounded h-full flex flex-col">
 
                             {/* DOWNLOAD TEXT */}
                             <div>
@@ -98,23 +86,57 @@ export default function Home({ categories }) {
 
                             <hr className="border-white/30" />
 
-                            {/* CATEGORY LIST */}
-                            <div>
+                            {/* CATEGORY LIST — flex-1 se poora space lega */}
+                            <div className="flex flex-col flex-1 min-h-0">
                                 <h3 className="text-xl font-semibold mb-3">
                                     List of Download Files
                                 </h3>
 
-                                <div className="grid grid-cols-1 gap-2">
+                                <div className="flex flex-col gap-2 h-[470px] overflow-y-auto pr-2 space-y-2 custom-scrollbar">
                                     {categories.map((item) => (
                                         <Link
                                             key={item.id}
-                                            // href={`/product/${item.id}`}
                                             href="/products-list"
-                                            className="text-sm font-semibold border border-white/30 px-2 py-1 rounded flex items-center gap-1 bg-white text-black hover:bg-amber-200 transition"
+                                            className="flex items-center justify-between bg-white text-black px-3 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
                                         >
-                                            ▸ {item.title}
+                                            <div className="flex items-center gap-3">
+                                                <img
+                                                    src={
+                                                        item.images?.length > 0 && item.images[0]?.image_url
+                                                            ? `${api.image.imageURL}${item.images[0].image_url}`
+                                                            : "/images/default.png"
+                                                    }
+                                                    alt={item.title}
+                                                    width={80}
+                                                    height={80}
+                                                    className="object-contain rounded w-12 h-12 flex-shrink-0"
+                                                />
+                                                {item.title}
+                                            </div>
+
+                                            <ChevronsRight />
                                         </Link>
                                     ))}
+                                </div>
+                            </div>
+
+                            <hr className="border-white/30" />
+
+                            {/* AUTH — NEECHE FIXED */}
+                            <div className="bg-white text-black p-4 rounded shadow">
+                                <div className="flex flex-col gap-2">
+                                    <button
+                                        onClick={() => router.push("/login")}
+                                        className="bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
+                                    >
+                                        Login
+                                    </button>
+                                    <button
+                                        onClick={() => router.push("/register")}
+                                        className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
+                                    >
+                                        Register
+                                    </button>
                                 </div>
                             </div>
 
@@ -124,25 +146,19 @@ export default function Home({ categories }) {
 
                 {/* ================= MAIN CONTENT ================= */}
                 <main className="flex-1 p-4 mt-16">
-
-                    <div className="border border-gray-300 rounded bg-white p-6">
-
-                        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+                    <div className="border border-gray-300 rounded bg-white p-10">
+                        {/* <h2 className="text-2xl font-semibold text-gray-700 mb-6">
                             Product Information
-                        </h2>
-
-                        <div className="bg-gray-200 px-4 py-2 mb-6 border-l-4 border-green-700">
+                        </h2> */}
+                        {/* <div className="bg-gray-200 px-4 py-2 mb-6 border-l-4 border-green-700">
                             <h3 className="text-lg font-semibold text-gray-700">
                                 Product category
                             </h3>
-                        </div>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 text-center">
-
+                        </div> */}
+                        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 text-center">
                             {categories.map((item) => (
                                 <Link
                                     key={item.id}
-                                    // href={`/product/${item.id}`}
                                     href="/products-list"
                                     className="group flex flex-col items-center cursor-pointer border border-gray-200 p-5 rounded-md transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1"
                                 >
@@ -155,12 +171,71 @@ export default function Home({ categories }) {
                                         alt={item.title}
                                         className="h-20 object-contain mb-4 transition-all duration-300 ease-in-out group-hover:scale-110"
                                     />
-
                                     <p className="text-sm font-semibold text-green-800 transition-all duration-300 group-hover:text-red-800">
                                         {item.title}
                                     </p>
                                 </Link>
                             ))}
+                        </div> */}
+
+                        <Swiper
+                            modules={[Autoplay, Pagination]}
+                            slidesPerView={1}
+                            loop={true}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
+                            pagination={{ clickable: true }}
+                            className="w-full max-w-[900px] mx-auto"
+                        >
+
+                            {bannerSlides.map((slide, index) => (
+
+                                <SwiperSlide key={index}>
+
+                                    <img
+                                        src={`${api.image.imageURL}${slide.image}`}
+                                        alt={`Banner ${index + 1}`}
+                                        className="w-full h-[250px] md:h-[400px] object-cover rounded-lg"
+                                    />
+
+                                </SwiperSlide>
+
+                            ))}
+
+                        </Swiper>
+                    </div>
+
+
+                    <div className="bg-white border border-gray-200  p-6 sm:p-8">
+
+                        <span className="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+                            About Us
+                        </span>
+                        <h2 className="text-gray-600 leading-8 text-sm sm:text-base mb-5">
+
+                            {aboutData?.title}
+
+                        </h2>
+
+                        <div className="space-y-5">
+
+                            {aboutData?.description
+                                ?.split("\n")
+                                .filter((item) => item.trim() !== "")
+                                .map((para, index) => (
+
+                                    <p
+                                        key={index}
+                                        className="text-gray-600 leading-8 text-sm sm:text-base"
+                                    >
+
+                                        {para}
+
+                                    </p>
+
+                                ))}
 
                         </div>
 
@@ -168,7 +243,8 @@ export default function Home({ categories }) {
 
                 </main>
 
+
             </div>
-        </section>
+        </section >
     );
 }

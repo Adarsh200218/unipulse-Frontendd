@@ -1,5 +1,6 @@
-const BASE_URL = 'http://unipluse.com/api/';
-const BASE_URL_IMAGE = 'http://unipluse.com/storage/';
+const BASE_URL = 'https://api.unipulseinstruments.com/api/';
+const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
+
 
 export const api = {
 
@@ -27,12 +28,26 @@ export const api = {
         viewManual: `${BASE_URL}download`,
         saveProductQuery: `${BASE_URL}product-query/save`,
         productQueryList: `${BASE_URL}product-query/all`,
+        requestPurposalShow: `${BASE_URL}request-purposal/list`,
+        requestPurposalAdd: `${BASE_URL}request-purposal/add`,
+        requestPurposalDelete: `${BASE_URL}request-purposal/delete/`,
         exportproductQuery: `${BASE_URL}product-query/export`,
         deleteQuery: `${BASE_URL}product-query`,
         resendVerficationEmail: `${BASE_URL}resend-verification`,
         verifyEmail: `${BASE_URL}verify-email`,
+        // ===== BANNER =====
+        getBanners: `${BASE_URL}banners/index`,
+        storeBanner: `${BASE_URL}banners/add`,
+        showBanner: `${BASE_URL}banner/show`,
+        updateBanner: `${BASE_URL}banners/update`,
+        deleteBanner: `${BASE_URL}banners/delete`,
+        // ===== ABOUT =====
+        getAbout: `${BASE_URL}about/list`,
+        saveAbout: `${BASE_URL}about/save`,
+        showAbout: `${BASE_URL}about/show`,
+        deleteAbout: `${BASE_URL}about/delete`,
+        contactUs: `${BASE_URL}contact/store`,
     },
-
 
     image: {
         imageURL: BASE_URL_IMAGE,

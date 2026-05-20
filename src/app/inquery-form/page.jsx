@@ -1,5 +1,5 @@
-import RegisterPage from "./Registerpage";
 import { api } from "../apis/apiList";
+import InqueryForm from "./form-page";
 
 export const dynamic = "force-dynamic";
 
@@ -9,5 +9,5 @@ export default async function Page() {
     const categories = data?.data || [];
     // console.log("Full data:", data);
 
-    return <RegisterPage categories={categories} />;
+    return <InqueryForm categories={categories} />;
 }

@@ -4,17 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --no-lint",
     "start": "next start",
     "lint": "eslint"
   },
+  "resolutions": {
+    "@tailwindcss/oxide": "npm:@tailwindcss/oxide-linux-x64-gnu"
+  },
   "dependencies": {
     "lucide-react": "^1.8.0",
-    "next": "16.2.3",
+    "next": "^15.5.15",
     "react": "19.2.4",
     "react-datepicker": "^9.1.0",
     "react-dom": "19.2.4",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "swiper": "^12.1.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
