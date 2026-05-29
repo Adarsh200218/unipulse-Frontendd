@@ -146,10 +146,31 @@ export default function Home({ categories }) {
 
                 {/* ================= MAIN CONTENT ================= */}
                 <main className="flex-1 p-4 mt-16">
-                    <div className="border border-gray-300 rounded bg-white p-10">
-                        {/* <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-                            Product Information
-                        </h2> */}
+                    {/* <div className="mb-4">
+                        <a
+                            href="https://www.unipulseindia.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:text-green-700 transition-all duration-200"
+                        >
+                            ← Go Back
+                        </a>
+                    </div> */}
+                    <h1 className="text-3xl font-bold text-gray-800 leading-snug mb-2">
+                        {aboutData?.title}{" "}
+
+                        <span className="text-green-700">
+                            {aboutData?.highlight_title}
+                        </span>
+                    </h1>
+
+                    <p className="text-gray-600 text-base leading-7 mb-4">
+                        {aboutData?.sub_title}
+                    </p>
+
+
+                    <div className="border border-gray-300 mb-10 rounded bg-white p-10">
+
                         {/* <div className="bg-gray-200 px-4 py-2 mb-6 border-l-4 border-green-700">
                             <h3 className="text-lg font-semibold text-gray-700">
                                 Product category
@@ -193,31 +214,38 @@ export default function Home({ categories }) {
                             {bannerSlides.map((slide, index) => (
 
                                 <SwiperSlide key={index}>
-
                                     <img
                                         src={`${api.image.imageURL}${slide.image}`}
                                         alt={`Banner ${index + 1}`}
-                                        className="w-full h-[250px] md:h-[400px] object-cover rounded-lg"
+                                        className="w-full h-[300px]  object-fill rounded-lg"
                                     />
-
                                 </SwiperSlide>
-
                             ))}
-
                         </Swiper>
                     </div>
 
 
                     <div className="bg-white border border-gray-200  p-6 sm:p-8">
+                        <div className="flex items-center justify-between mb-5">
+                            <span className="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full">
+                                About Us
+                            </span>
 
-                        <span className="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
-                            About Us
-                        </span>
-                        <h2 className="text-gray-600 leading-8 text-sm sm:text-base mb-5">
+                            <a
+                                href="https://www.unipulseindia.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition inline-block cursor-pointer"
+                            >
+                                Go Back to Unipulse India
+                            </a>
+                        </div>
+
+                        {/* <h2 className="text-gray-600 leading-8 text-sm sm:text-base mb-5">
 
                             {aboutData?.title}
 
-                        </h2>
+                        </h2> */}
 
                         <div className="space-y-5">
 

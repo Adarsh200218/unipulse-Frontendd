@@ -13,15 +13,15 @@ export default function HomepageContentManage() {
     const sections = [
         {
             id: 1,
-            title: "Banner Images",
+            title: "Homepage Banner Images",
             description: "Manage homepage slider images",
             type: "banner",
         },
 
         {
             id: 2,
-            title: "Homepage Description",
-            description: "Manage homepage description",
+            title: "Homepage Title and Description",
+            description: "Manage homepage title description",
             type: "about",
         },
     ];

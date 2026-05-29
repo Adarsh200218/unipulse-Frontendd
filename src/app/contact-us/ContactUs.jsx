@@ -2,9 +2,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { api } from "../apis/apiList";
-import { ChevronsRight, Mail, Phone, MapPin } from "lucide-react";
+import { ChevronsRight, Mail, Phone, MapPin, } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactUsClient({ categories = [] }) {
     const router = useRouter();
@@ -186,67 +187,124 @@ export default function ContactUsClient({ categories = [] }) {
                         <div className="p-5 lg:p-8 space-y-6">
 
                             {/* CONTACT INFO */}
-                            <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
-                                <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                            <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                                     {/* ADDRESS */}
-                                    <div className="flex-1 p-5">
+                                    <div className="bg-white border border-gray-200 rounded-xl p-5">
                                         <div className="flex items-center gap-2.5 mb-3">
                                             <div className="bg-green-100 p-2 rounded-full">
                                                 <MapPin className="text-green-700" size={16} />
                                             </div>
-                                            <h2 className="text-base font-bold text-gray-800">Address</h2>
+
+                                            <h2 className="text-base font-bold text-gray-800">
+                                                Address
+                                            </h2>
                                         </div>
+
                                         <p className="text-gray-600 text-sm leading-6">
-                                            UNIPULSE INSTRUMENTS PVT LTD<br />
+                                            <strong>UNIPULSE INSTRUMENTS PVT LTD</strong><br />
                                             948, Level 9 (Inside Regus business center)<br />
                                             Spaze I-Tech Park, A1 Tower<br />
                                             Sector - 49, Sohna Road<br />
-                                            Gurgaon - 122018, (State - Haryana), India
+                                            Gurgaon - 122018, Haryana, India
                                         </p>
                                     </div>
 
-                                    {/* CONTACT DETAILS */}
-                                    <div className="flex-1 p-5">
+                                    {/* CONTACT */}
+                                    <div className="bg-white border border-gray-200 rounded-xl p-5">
                                         <div className="flex items-center gap-2.5 mb-3">
                                             <div className="bg-green-100 p-2 rounded-full">
                                                 <Phone className="text-green-700" size={16} />
                                             </div>
-                                            <h2 className="text-base font-bold text-gray-800">Contact</h2>
+
+                                            <h2 className="text-base font-bold text-gray-800">
+                                                Contact
+                                            </h2>
                                         </div>
 
-                                        <div className="space-y-3 text-gray-600 text-sm">
-                                            <div>
-                                                <p className="font-semibold text-gray-700 text-[11px] uppercase tracking-wider mb-1.5">
-                                                    Phone Numbers
-                                                </p>
-                                                <div className="space-y-1">
-                                                    <a href="tel:+911246769140" className="flex items-center gap-2 hover:text-green-700 transition">
-                                                        <Phone size={13} className="shrink-0" />
-                                                        +91 (124) 676 9140 (Board)
-                                                    </a>
-                                                    <a href="tel:+919810605510" className="flex items-center gap-2 hover:text-green-700 transition">
-                                                        <Phone size={13} className="shrink-0" />
-                                                        +91-9810605510
-                                                    </a>
-                                                    <a href="tel:+919311141480" className="flex items-center gap-2 hover:text-green-700 transition">
-                                                        <Phone size={13} className="shrink-0" />
-                                                        +91-9311141480
-                                                    </a>
-                                                </div>
-                                            </div>
+                                        <div className="space-y-2 text-sm text-gray-600">
+                                            <a href="tel:+911246769140" className="flex items-center gap-2 hover:text-green-700">
+                                                <Phone size={13} />
+                                                +91 (124) 676 9140
+                                            </a>
+                                            <a href="tel:+919810605510" className="flex items-center gap-2 hover:text-green-700">
+                                                <Phone size={13} />
+                                                ( Board)M: +91-9810605510/9311141480
 
-                                            <div>
-                                                <p className="font-semibold text-gray-700 text-[11px] uppercase tracking-wider mb-1.5">
-                                                    Email Address
-                                                </p>
-                                                <a href="mailto:marketing@unipulseinstruments.com" className="flex items-center gap-2 hover:text-green-700 transition">
-                                                    <Mail size={13} className="shrink-0" />
-                                                    marketing@unipulseinstruments.com
-                                                </a>
-                                            </div>
+                                            </a>
+
+                                            <a href="mailto:marketing@unipulseinstruments.com" className="flex items-center gap-2 hover:text-green-700">
+                                                <Mail size={13} />
+                                                marketing@unipulseinstruments.com
+                                            </a>
                                         </div>
                                     </div>
+
+                                    {/* SALES OFFICE */}
+                                    <div className="bg-white border border-gray-200 rounded-xl p-5">
+                                        <div className="flex items-center gap-2.5 mb-3">
+                                            <div className="bg-green-100 p-2 rounded-full">
+                                                <MapPin className="text-green-700" size={16} />
+                                            </div>
+
+                                            <h2 className="text-base font-bold text-gray-800">
+                                                Corporate address
+                                            </h2>
+                                        </div>
+
+                                        <p className="text-gray-600 text-sm leading-6">
+                                            <strong>BANGALORE BRANCH OFFICE UNIPULSE INDIA</strong> <br />
+                                            Bangalore Tejas Arcade<br />
+                                            3rd Floor, Tejas Arcade,, 527/B, 528/A, 529/A-9/1,<br />
+                                            1st main road block, Subramanyanagar, Ward no. 9, <br />Bangalore, 560010
+                                        </p>
+                                        <br />
+
+                                        <a href="tel:+91-8398020505" className="flex text-const { mutate } = useSWRConfig()
+                                         items-center gap-2 hover:text-green-700">
+                                            <Phone size={13} />
+                                            +91-8398020505
+                                        </a>
+                                        <a href="mailto:bangalore@unipulseindia.com" className="flex items-center text-sm gap-2 hover:text-green-700">
+                                            <Mail size={13} />
+                                            bangalore@unipulseindia.com
+                                        </a>
+                                    </div>
+
+                                    {/* SUPPORT */}
+                                    <div className="bg-white border border-gray-200 rounded-xl p-5">
+                                        <div className="flex items-center gap-2.5 mb-3">
+                                            <div className="bg-green-100 p-2 rounded-full">
+                                                <Phone className="text-green-700" size={16} />
+                                            </div>
+
+                                            <h2 className="text-base font-bold text-gray-800">
+                                                Service Support :
+                                            </h2>
+                                        </div>
+
+                                        <div className="space-y-2 text-sm text-gray-600">
+                                            <a href="tel:+919311141480" className="flex items-center gap-2 hover:text-green-700">
+                                                <Phone size={13} />
+                                                +91-9311141480
+                                            </a>
+                                            <a
+                                                href="tel:+919971996309"
+                                                className="flex items-center gap-2 hover:text-green-700"
+                                            >
+                                                <FaWhatsapp size={13} className="text-green-600" />
+                                                +91-9971996309
+                                            </a>
+
+                                            <a href="mailto:service@unipulseinstruments.com" className="flex items-center gap-2 hover:text-green-700">
+                                                <Mail size={13} />
+                                                service@unipulseinstruments.com
+                                            </a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 

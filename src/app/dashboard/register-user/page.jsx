@@ -126,6 +126,7 @@ export default function RegisterUser() {
                         <th className="border px-4 py-2 text-left">Contact No</th>
                         <th className="border px-4 py-2 text-center">Company Name</th>
                         <th className="border px-4 py-2 text-center">Address</th>
+                        <th className="border px-4 py-2 text-center">State</th>
                         <th className="border px-4 py-2 text-center">Other Information</th>
                         {/* <th className="border px-4 py-2 text-center">Country</th> */}
                         <th className="border px-4 py-2 text-center">User Verified</th>
@@ -161,6 +162,8 @@ export default function RegisterUser() {
                                     </span>
                                 )}
                                 </td>
+
+                                <td className="border px-4 py-2">{user.state}</td>
 
                                 <td className="border px-4 py-2 text-center"> {user.other_info ? (
                                     user.other_info

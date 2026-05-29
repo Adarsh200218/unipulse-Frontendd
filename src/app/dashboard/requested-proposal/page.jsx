@@ -85,6 +85,7 @@ export default function RequestedProposal() {
                         <th className="border px-4 py-2 text-center">Requested For</th>
                         <th className="border px-4 py-2 text-center">Serial No</th>
                         <th className="border px-4 py-2 text-center">Message</th>
+                        <th className="border px-4 py-2 text-center">Date</th>
                         {/* <th className="border px-4 py-2 text-center">Action</th> */}
 
                     </tr>
@@ -106,6 +107,20 @@ export default function RequestedProposal() {
                                 <td className="border px-4 py-2 text-center">{item.serial_no}</td>
                                 <td className="border px-4 py-2 text-center max-w-[200px] truncate">
                                     {item.message}
+                                </td>
+                                <td className="border px-4 py-2 text-center">
+                                    <div className="flex flex-col">
+                                        <span>
+                                            {new Date(item.created_at).toLocaleDateString("en-IN")}
+                                        </span>
+
+                                        <span className="text-xs text-gray-500">
+                                            {new Date(item.created_at).toLocaleTimeString("en-IN", {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </span>
+                                    </div>
                                 </td>
                                 {/* <td className="border px-4 py-2 text-center">
                                     <button

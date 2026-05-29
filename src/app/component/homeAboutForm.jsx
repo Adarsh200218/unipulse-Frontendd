@@ -15,6 +15,8 @@ export default function HomeAboutForm() {
     const [formData, setFormData] = useState({
         title: "",
         description: "",
+        highlight_title: "",
+        sub_title: "",
     });
 
     const [loading, setLoading] = useState(false);
@@ -35,9 +37,7 @@ export default function HomeAboutForm() {
 
     // FETCH ABOUT
     const fetchAbout = async () => {
-
         try {
-
             const res = await fetch(
                 api.apiCall.getAbout,
                 {
@@ -48,39 +48,30 @@ export default function HomeAboutForm() {
             );
 
             const json = await res.json();
-
             const data = json.data[0];
-
             if (data) {
-
                 setFormData({
                     title: data.title || "",
                     description: data.description || "",
+                    highlight_title: data.highlight_title || "",
+                    sub_title: data.sub_title || "",
                 });
             }
 
         } catch (err) {
-
             toast.error("Fetch Error");
-
         }
     };
 
     useEffect(() => {
-
         fetchAbout();
-
     }, []);
 
     // SUBMIT
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-
         setLoading(true);
-
         try {
-
             const res = await fetch(
                 api.apiCall.saveAbout,
                 {
@@ -96,6 +87,8 @@ export default function HomeAboutForm() {
                     body: JSON.stringify({
                         title: formData.title,
                         description: formData.description,
+                        highlight_title: formData.highlight_title,
+                        sub_title: formData.sub_title,
                     }),
                 }
             );
@@ -137,9 +130,7 @@ export default function HomeAboutForm() {
             <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
 
                 <h2 className="text-2xl font-bold mb-6 text-center">
-
-                    About Content
-
+                    HomePage About Content
                 </h2>
 
                 <form
@@ -165,9 +156,41 @@ export default function HomeAboutForm() {
 
                     </div>
 
+                    {/* HIGHLIGHTED TEXT */}
+                    <div>
+                        <label className="block mb-2 font-medium">
+                            Hightlihted Text
+                        </label>
+
+                        <input
+                            type="text"
+                            name="highlight_title"
+                            value={formData.highlight_title}
+                            onChange={handleChange}
+                            className={inputClass}
+                            required
+                        />
+                    </div>
+
+                    {/* SUB-TITLE */}
+                    <div>
+                        <label className="block mb-2 font-medium">
+                            Subtitle
+                        </label>
+
+                        <input
+                            type="text"
+                            name="sub_title"
+                            value={formData.sub_title}
+                            onChange={handleChange}
+                            className={inputClass}
+                            required
+                        />
+
+                    </div>
+
                     {/* DESCRIPTION */}
                     <div>
-
                         <label className="block mb-2 font-medium">
                             Description
                         </label>
@@ -180,7 +203,6 @@ export default function HomeAboutForm() {
                             className={inputClass}
                             required
                         />
-
                     </div>
 
                     {/* BUTTON */}

@@ -16,6 +16,7 @@ export default function RegisterPage({ categories }) {
     name: '',
     phone: '',
     company_name: '',
+    state: '',
     address: '',
     password: '',
     confirmPassword: '',
@@ -29,6 +30,7 @@ export default function RegisterPage({ categories }) {
     name: useRef(null),
     phone: useRef(null),
     company_name: useRef(null),
+    state: useRef(null),
     address: useRef(null),
     password: useRef(null),
     confirmPassword: useRef(null),
@@ -65,12 +67,12 @@ export default function RegisterPage({ categories }) {
     const digitsOnly = form.phone.replace(/\D/g, "");
     if (digitsOnly.length < 10 || digitsOnly.length > 15) { showError("Please enter a valid phone number (10-15 digits)", refs.phone); return; }
 
+    if (!form.state.trim()) { toast.error("Please Select State"); return; }
+
     if (!form.password) { toast.error("Password is required"); return; }
     if (form.password.length < 6 || form.password.length > 12) { toast.error("Password must be between 6 to 12 characters"); return; }
     if (!form.confirmPassword) { toast.error("Please confirm your password"); return; }
     if (form.password !== form.confirmPassword) { toast.error("Confirm Password do not match"); return; }
-
-
 
     setLoading(true);
     try {
@@ -85,6 +87,7 @@ export default function RegisterPage({ categories }) {
           name: form.name,
           phone: form.phone,
           company_name: form.company_name,
+          state: form.state,
           address: form.address,
           password: form.password,
           password_confirmation: form.confirmPassword,
@@ -109,6 +112,45 @@ export default function RegisterPage({ categories }) {
       setLoading(false);
     }
   };
+
+  const indianStates = [
+    "Andaman and Nicobar Islands",
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chandigarh",
+    "Chhattisgarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Ladakh",
+    "Lakshadweep",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Puducherry",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+  ].sort();
 
   return (
     <section>
@@ -364,6 +406,29 @@ export default function RegisterPage({ categories }) {
                         <label className="block font-medium mb-1">Address <span className="text-red-600"></span></label>
                         <input type="text" name="address" value={form.address} onChange={handleChange} placeholder="Street, Room, Building"
                           className="w-full bg-white border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+                      </div>
+
+                      <div>
+                        <label className="block font-medium mb-1">
+                          State <span className="text-red-600">*</span>
+                        </label>
+
+                        <select
+                          name="state"
+                          value={form.state}
+                          onChange={handleChange}
+                          size={1}
+                          className="w-full bg-white border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                          style={{ direction: "ltr" }}
+                        >
+                          <option value="">Select State</option>
+
+                          {indianStates.map((state) => (
+                            <option key={state} value={state}>
+                              {state}
+                            </option>
+                          ))}
+                        </select>
                       </div>
 
                       <div>

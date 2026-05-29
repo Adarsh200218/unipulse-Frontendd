@@ -32,7 +32,7 @@ export default function InqueryForm({ categories }) {
 
     const REQUEST_OPTIONS = [
         { label: 'Technical Support', value: 'technical_support' },
-        { label: 'Local Distributor', value: 'local_distributor' },
+        // { label: 'Local Distributor', value: 'local_distributor' },
         { label: 'Quotation', value: 'quotation' },
         { label: 'Operation Manual', value: 'operation_manual' },
         { label: 'Others', value: 'others' },
@@ -214,7 +214,7 @@ export default function InqueryForm({ categories }) {
                             <div className="section-in max-w-3xl mx-auto bg-white shadow-2xl rounded-lg p-6">
 
                                 <header className="article-header mb-2">
-                                    <h1 className="text-3xl text-center font-bold uppercase">Inquiry Form</h1>
+                                    <h1 className="text-3xl text-center font-bold uppercase">Submit Your Query</h1>
                                 </header>
 
                                 <div className="article-body mb-6 text-center text-gray-700 bg-[#EFEFEF] p-4">
@@ -223,7 +223,7 @@ export default function InqueryForm({ categories }) {
 
                                 {success && (
                                     <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded text-center">
-                                        ✅ Your inquiry has been submitted successfully! We will get back to you soon.
+                                        ✅ Your query has been submitted successfully! We will get back to you soon.
                                     </div>
                                 )}
 
@@ -260,8 +260,34 @@ export default function InqueryForm({ categories }) {
 
                                     {/* Serial No */}
                                     <div className="flex border border-gray-300 mb-[-1px]">
+                                        <div className="w-40 min-w-[160px] bg-gray-200 flex items-center px-4 py-3 text-sm font-medium border-r border-gray-300 leading-5">
+                                            <span>
+                                                Existing Serial No. of Product Specification
+                                            </span>
+                                            <span className="text-red-600 ml-1 text-base leading-none">*</span>
+                                        </div>
+
+                                        <div className="flex-1 bg-white px-4 py-3">
+                                            <input
+                                                type="text"
+                                                name="serialNo"
+                                                value={form.serialNo}
+                                                onChange={handleChange}
+                                                placeholder="Enter serial number"
+                                                className={`w-full border rounded p-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white ${errors.serialNo ? 'border-red-500' : 'border-gray-300'
+                                                    }`}
+                                            />
+
+                                            {errors.serialNo && (
+                                                <p className="text-red-500 text-xs mt-1">
+                                                    {errors.serialNo}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {/* <div className="flex border border-gray-300 mb-[-1px]">
                                         <div className="w-40 min-w-[160px] bg-gray-200 flex items-center px-4 py-3 text-sm font-medium border-r border-gray-300">
-                                            Serial No.<span className="text-red-600 ml-1">*</span>
+                                            Existing serial no of product specification<span className="text-red-600 ml-1">*</span>
                                         </div>
                                         <div className="flex-1 bg-white px-4 py-3">
                                             <input type="text" name="serialNo" value={form.serialNo} onChange={handleChange} placeholder="Enter serial number"
@@ -269,7 +295,7 @@ export default function InqueryForm({ categories }) {
                                             />
                                             {errors.serialNo && <p className="text-red-500 text-xs mt-1">{errors.serialNo}</p>}
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     {/* Name */}
                                     <div className="flex border border-gray-300 mb-[-1px]">
