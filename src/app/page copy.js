@@ -45,13 +45,13 @@ export default function Home() {
                     "Others"
 
                   ].map((item, i) => (
-                    <a
+                    <Link
                       key={i}
                       href="#"
                       className="text-sm font-semibold border border-white/30 px-2 py-1 rounded flex items-center gap-1 bg-white text-black transition"
                     >
                       ▸ {item}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -160,12 +160,12 @@ export default function Home() {
                    {/* Row 5 */}
                 <tr className="hover:bg-gray-50">
                   <th className="border p-2 text-left">
-                    <a
+                    <Link
                       href="#"
                       className="hover:underline hover:text-red-500 text-gray-800"
                     >
                       UTMⅡ(W)(WR)
-                    </a>
+                    </Link>
                   </th>
 
                   <td className="border p-2 text-center "><Omega className="inline-block" /></td>
@@ -218,12 +218,12 @@ export default function Home() {
                 {/* Row 2 */}
                 <tr className="hover:bg-gray-50">
                   <th className="border p-2 text-left">
-                    <a
+                    <Link
                       href="#"
                       className="hover:underline hover:text-red-500 text-gray-800"
                     >
                       UTMⅢ-10K
-                    </a>
+                    </Link>
                   </th>
 
                   <td className="border p-2 text-center "><Omega className="inline-block" /></td>
@@ -234,12 +234,12 @@ export default function Home() {
                   {/* Row 3 */}
                 <tr className="hover:bg-gray-50">
                   <th className="border p-2 text-left">
-                    <a
+                    <Link
                       href="#"
                       className="hover:underline hover:text-red-500 text-gray-800"
                     >
                       UTMⅢ(C)(RC)
-                    </a>
+                    </Link>
                   </th>
 
                   <td className="border p-2 text-center "><Omega className="inline-block" /></td>
@@ -251,12 +251,12 @@ export default function Home() {
                   {/* Row 4 */}
                 <tr className="hover:bg-gray-50">
                   <th className="border p-2 text-left">
-                    <a
+                    <Link
                       href="#"
                       className="hover:underline hover:text-red-500 text-gray-800"
                     >
                       UTMⅡ/UTMⅡ(R)
-                    </a>
+                    </Link>
                   </th>
 
                   <td className="border p-2 text-center "><Omega className="inline-block" /></td>
@@ -268,7 +268,7 @@ export default function Home() {
                    {/* Row 5 */}
                 <tr className="hover:bg-gray-50">
                   <th className="border p-2 text-left">
-                    <a href="#"  className="hover:underline hover:text-red-500 text-gray-800" >  UTMⅡ(W)(WR) </a>
+                    <Link href="#"  className="hover:underline hover:text-red-500 text-gray-800" >  UTMⅡ(W)(WR) </Link>
                   </th>
 
                   <td className="border p-2 text-center "><Omega className="inline-block" /></td>

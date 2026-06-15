@@ -58,61 +58,6 @@ export default function Page() {
 
 
 
-          {/*<aside className="w-[330px]">
-
-       
-          <div className="flex border mb-3 bg-white">
-            <input
-              type="text"
-              placeholder="Product Search"
-              className="flex-1 px-2 py-1 outline-none text-xs"
-            />
-            <button className="px-3 border-l bg-gray-100">🔍</button>
-          </div>
-
-     
-          <div className="border bg-white">
-            <div className="bg-gray-200 px-3 py-2 font-semibold border-b">
-              Torque meter
-            </div>
-
-            <div className="border-b">
-              <div className="px-3 py-2 bg-gray-300 font-medium">
-                Shaft type
-              </div>
-              <div className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                Coupling
-              </div>
-              <div className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                Torque monitor
-              </div>
-            </div>
-
-            {[
-              "Loadcells",
-              "Displacement measurement",
-              "Weighing measurement",
-              "Force measurement",
-              "Amplifiers",
-              "Peripherals",
-              "Others",
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="px-3 py-2 border-t hover:bg-gray-100 cursor-pointer"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
-        
-          <div className="mt-3">
-            <button className="w-full border bg-white py-2 text-xs hover:bg-gray-50">
-              Obsolete Products
-            </button>
-          </div>
-        </aside>*/}
 
           {/* ================= RIGHT CONTENT ================= */}
           <div className="flex-1">

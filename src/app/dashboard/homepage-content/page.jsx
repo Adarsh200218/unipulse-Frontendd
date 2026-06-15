@@ -37,14 +37,15 @@ export default function HomepageContentManage() {
 
 
 
-            <table className="w-full border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow-lg">
+             <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
 
                 <thead className="bg-[#b3ffd3]">
                     <tr>
-                        <th className="border px-4 py-2 text-cent">S.No</th>
-                        <th className="border p-2 text-left">Title</th>
-                        <th className="border p-2">Description</th>
-                        <th className="border p-2">Action</th>
+                        <th className="border px-2 py-2 text-cent">S.No</th>
+                        <th className="border px-2 py-2 text-left">Title</th>
+                        <th className="border px-2 py-2">Description</th>
+                        <th className="border px-2 py-2">Action</th>
                     </tr>
                 </thead>
 
@@ -52,19 +53,19 @@ export default function HomepageContentManage() {
                     {sections.map((item, index) => (
                         <tr key={item.id}>
 
-                            <td className="border p-3 text-center">
+                            <td className="border px-2 py-2 text-center">
                                 {index + 1}
                             </td>
 
-                            <td className="border p-3 font-semibold">
+                            <td className="border px-2 py-2 font-semibold">
                                 {item.title}
                             </td>
 
-                            <td className="border p-3 text-gray-500">
+                            <td className="border px-2 py-2 text-gray-500">
                                 {item.description}
                             </td>
 
-                            <td className="border p-3">
+                            <td className="border px-2 py-2">
 
                                 <div className="flex justify-center gap-2">
 
@@ -110,6 +111,7 @@ export default function HomepageContentManage() {
                 </tbody>
 
             </table>
+            </div>
 
         </section>
     );

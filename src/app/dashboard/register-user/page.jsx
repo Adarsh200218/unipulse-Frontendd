@@ -104,19 +104,15 @@ export default function RegisterUser() {
         <>
             {/* HEADER */}
             <div className="flex justify-between items-center mb-2">
-                <h2 className="text-2xl font-semibold text-white bg-green-700 px-4 py-2">
+                <h2 className="text-xl font-semibold text-white bg-green-700 px-4 py-2 rounded-lg">
                     Registered Users
                 </h2>
-                {/* <button
-                    onClick={() => router.push('/dashboard/users/add')}
-                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow"
-                >
-                    + Add User
-                </button> */}
+             
             </div>
 
             {/* TABLE */}
-            <table className="w-full border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow-lg">
+     <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
                 <thead className="bg-[#b3ffd3]">
                     <tr>
                         <th className="border px-4 py-2 text-center">S.No</th>
@@ -226,12 +222,15 @@ export default function RegisterUser() {
                     )}
                 </tbody>
             </table>
+            </div>
 
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={(page) => setCurrentPage(page)}
             />
+
+            
 
         </>
     );

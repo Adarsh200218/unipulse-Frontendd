@@ -139,7 +139,7 @@ export default function CategoryForm({ id = null }) {
         "w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500";
 
     return (
-        <section className="min-h-screen flex items-start justify-center bg-gray-100 p-4 pt-12">
+        <section className=" flex items-start justify-center bg-gray-100 p-2 ">
 
             <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
 

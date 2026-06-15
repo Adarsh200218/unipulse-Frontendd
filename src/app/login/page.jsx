@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <Suspense fallback={null}>
       {/* <LoginClient /> */}
-      <LoginClient categories={data.data || []} />;
+      <LoginClient categories={data.data || []} />
     </Suspense>
   );
 }

@@ -1,6 +1,8 @@
 const BASE_URL = 'https://api.unipulseinstruments.com/api/';
 const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
 
+// const BASE_URL = 'http://localhost:8000/api/';
+// const BASE_URL_IMAGE = 'http://localhost:8000/storage/';
 
 export const api = {
 

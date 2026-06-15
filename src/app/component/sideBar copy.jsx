@@ -1,6 +1,5 @@
 
 
-
 "use client";
 
 import { removeToken, removeUser, useAuthGuard } from "../../helper/getCommonData";
@@ -22,7 +21,7 @@ export default function Sidebar() {
             <div className="p-4 lg:p-4 bg-green-800 text-white h-100vh flex flex-col justify-between rounded-lg">
 
                 <div>
-                    <h1 className="text-2xl font-bold lg:mb-4 mb-4">DashBoard</h1>
+                    <h1 className="text-2xl font-bold mb-4 lg:mb-2">DashBoard</h1>
 
                     <div className="space-y-4">
 

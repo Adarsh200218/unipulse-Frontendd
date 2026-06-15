@@ -140,13 +140,13 @@ export default function ProductQueryPage() {
     return (
         <>
 
-            <div className="flex justify-between items-center mb-2">
-                <h2 className="text-2xl font-semibold text-white bg-green-700 px-4 py-2">
+            <div className="flex justify-between items-center mb-2 flex-col lg:flex-row gap-3 ">
+                <h2 className="text-xl font-semibold text-white bg-green-700 px-4 py-2 rounded-lg">
                     Product Inquiry
                 </h2>
 
                 {/* ✅ Right side Date Filter */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-col lg:flex-row ">
 
                     {/* ✅ Dropdown Filter */}
                     <select
@@ -206,17 +206,18 @@ export default function ProductQueryPage() {
             </div>
 
 
-            <table className="w-full border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow-lg">
+           <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
                 <thead className="bg-[#b3ffd3]">
                     <tr>
-                        <th className="border px-4 py-2 text-center">S.No</th>
-                        <th className="border px-4 py-2 text-left">Visited User</th>
-                        <th className="border px-4 py-2 text-left">Product Name</th>
-                        <th className="border px-4 py-2 text-center">Catalogue</th>
-                        <th className="border px-4 py-2 text-center">Manual</th>
-                        <th className="border px-4 py-2 text-center">Price</th>
+                        <th className="border px-2 py-2 text-center">S.No</th>
+                        <th className="border px-2 py-2 text-left">Visited User</th>
+                        <th className="border px-2 py-2 text-left">Product Name</th>
+                        <th className="border px-2 py-2 text-center">Catalogue</th>
+                        <th className="border px-2 py-2 text-center">Manual</th>
+                        <th className="border px-2 py-2 text-center">Price</th>
                         {/* <th className="border px-4 py-2 text-center">Proposal</th> */}
-                        <th className="border px-4 py-2 text-center">Date</th>
+                        <th className="border px-2 py-2 text-center">Date</th>
                         {/* <th className="border px-4 py-2 text-center">Action</th> */}
                     </tr>
                 </thead>
@@ -231,22 +232,22 @@ export default function ProductQueryPage() {
                             <tr key={log.id} className="hover:bg-gray-50">
 
                                 {/* S.No — pagination aware */}
-                                <td className="border px-4 py-2 text-center">
+                                <td className="border px-2 py-2 text-center">
                                     {(currentPage - 1) * itemsPerPage + i + 1}
                                 </td>
 
                                 {/* Visited Client */}
-                                <td className="border px-4 py-2">
+                                <td className="border px-2 py-2">
                                     <p className="font-semibold">{log.user?.name || "—"}</p>
                                 </td>
 
                                 {/* Product Name */}
-                                <td className="border px-4 py-2">
+                                <td className="border px-2 py-2">
                                     {log.product?.product_name || "—"}
                                 </td>
 
                                 {/* Catalogue */}
-                                <td className="border px-4 py-2 text-center">
+                                <td className="border px-2 py-2 text-center">
                                     {log.catalogue ? (
                                         <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">
                                             ✓ Yes
@@ -257,7 +258,7 @@ export default function ProductQueryPage() {
                                 </td>
 
                                 {/* Manual */}
-                                <td className="border px-4 py-2 text-center">
+                                <td className="border px-2 py-2 text-center">
                                     {log.manual ? (
                                         <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-semibold">
                                             ✓ Yes
@@ -268,9 +269,9 @@ export default function ProductQueryPage() {
                                 </td>
 
                                 {/* Price */}
-                                <td className="border px-4 py-2 text-center">
+                                <td className="border px-2 py-2 text-center">
                                     {log.price ? (
-                                        <span className="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-semibold">
+                                        <span className="bg-amber-100 text-amber-700 px-2 py-1 rounded lg:text-xs  text-[10px] font-semibold">
                                             ✓ Yes
                                         </span>
                                     ) : (
@@ -290,7 +291,7 @@ export default function ProductQueryPage() {
                                 </td> */}
 
                                 {/* Date */}
-                                <td className="border px-4 py-2 text-center text-xs text-gray-500">
+                                <td className="border px-2 lg:px-4 py-2 text-center text-xs text-gray-500">
                                     {new Date(log.created_at).toLocaleString("en-IN")}
                                 </td>
 
@@ -313,6 +314,7 @@ export default function ProductQueryPage() {
                     )}
                 </tbody>
             </table>
+            </div>
 
             <Pagination
                 currentPage={currentPage}

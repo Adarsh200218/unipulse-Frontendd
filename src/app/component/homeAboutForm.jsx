@@ -125,9 +125,9 @@ export default function HomeAboutForm() {
 
     return (
 
-        <section className="min-h-screen flex items-start justify-center bg-gray-100 p-4 pt-12">
+        <section className="flex items-start justify-center bg-gray-100 p-2 pt-12">
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
 
                 <h2 className="text-2xl font-bold mb-6 text-center">
                     HomePage About Content
@@ -138,7 +138,7 @@ export default function HomeAboutForm() {
                     className="space-y-5"
                 >
 
-                    {/* TITLE */}
+                   
                     <div>
 
                         <label className="block mb-2 font-medium">

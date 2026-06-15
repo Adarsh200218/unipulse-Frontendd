@@ -1,278 +1,469 @@
 "use client";
-
+ 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "../apis/apiList";
 import { ChevronsRight } from "lucide-react";
+import { Omega, SquarePen } from "lucide-react";
+import { Lock } from 'lucide-react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import ContactButtonright from "./ContactButtonright";
+ 
 export default function Home({ categories }) {
     const router = useRouter();
     const [bannerSlides, setBannerSlides] = useState([]);
     const [aboutData, setAboutData] = useState(null);
     const fetchBanner = async () => {
-
+ 
         try {
-
+ 
             const res = await fetch(
                 api.apiCall.getBanners
             );
-
+ 
             const json = await res.json();
-
+ 
             if (json.status) {
-
+ 
                 setBannerSlides(json.data);
             }
-
+ 
         } catch (err) {
-
+ 
             console.log(err);
         }
     };
     const fetchAbout = async () => {
-
+ 
         try {
-
+ 
             const res = await fetch(
                 api.apiCall.getAbout
             );
-
+ 
             const json = await res.json();
-
+ 
             if (json.status) {
-
+ 
                 setAboutData(json.data[0]);
             }
-
+ 
         } catch (err) {
-
+ 
             console.log(err);
         }
     };
     useEffect(() => {
-
+ 
         fetchBanner();
         fetchAbout();
-
+ 
     }, []);
-    // const bannerSlides = [
-    //     "/images/slider1.jpg",
-    //     "/images/slider2.jpg",
-    //     "/images/slider3.jpg",
-    //     "/images/slidernew.jpg",
-    // ];
-
+    const [user, setUser] = useState(null);
+    const handleLogout = () => {
+        removeToken();
+        removeUser();
+        setUser(null);
+        router.Push("/");
+    };
+ 
+ 
     return (
-        <section className="pt-6">
-            <div className="flex flex-col lg:flex-row min-h-screen max-w-[1400px] mx-auto gap-4">
+        <>
+ 
+            <section className="pt-20 lg:pt-6">
+                <div className="container mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-6 gap-3 md:grid-cols-12">
+ 
+                        {/* ================= SIDEBAR ================= */}
+ 
+                        <aside className="order-2 lg:order-1 w-full md:col-span-4 lg:col-span-4 xl:col-span-3 shrink-0 px-4 xl:px-2  lg:py-14 py-4 pb-0 ">
+                            <div className="lg:sticky lg:top-20 overflow-hidden mb-2">
+ 
+                                <div className="px-3 py-3 lg:p-3 space-y-3 bg-green-800 text-white rounded h-full flex flex-col ">
+                                    <div className="text-black  rounded ">
+                                        {!user ? (
+                                            //<div className="flex justify-between flex-col-2 gap-2">
+                                            //    <Link href="/login#login-form"
+                                            //        className="relative overflow-hidden px-4 py-2.5 rounded-lg font-semibold text-white bg-green-600 border border-white group transition-all duration-300  hover:shadow-green-500/40 cursor-pointer"
+                                            //    >
+                                            //        <span className="absolute inset-0 w-0 bg-green-700 transition-all duration-500 ease-out group-hover:w-full"></span>
+                                            //        <span className="relative flex items-center gap-2">
+                                            //            {/*<Lock className="w-2 h-2"/>Login*/}
+                                            //            <Lock />Login
+                                            //        </span>
+                                            //    </Link>
+ 
+                                            //    <button
+                                            //        onClick={() => router.push("/register")}
+                                            //        className="relative overflow-hidden px-6 py-2.5 rounded-lg font-semibold text-white bg-blue-600 border border-white group transition-all duration-300  hover:shadow-blue-500/40 cursor-pointer"
+                                            //    >
+                                            //        <span className="absolute inset-0 w-0 bg-blue-700 transition-all duration-500 ease-out group-hover:w-full"></span>
+                                            //        <span className="relative flex items-center gap-2">
+                                            //            <SquarePen /> Register
+                                            //        </span>
+                                            //    </button>
+                                            //</div>
+                                            <div className="grid grid-cols-2 gap-2">
+    <Link
+        href="/login#login-form"
+        className="
+            group
+            relative
+            overflow-hidden
+            flex
+            items-center
+            justify-center
+            gap-2
+            h-10
+            rounded-xl
+            bg-green-600
+            text-white
+            font-medium
+            border
+            border-green-500
+            shadow-sm
+            hover:shadow-lg
+            hover:-translate-y-0.5
+            transition-all
+            duration-300
+        "
+    >
+        <span
+            className="
+                absolute
+                inset-0
+                bg-green-700
+                scale-x-0
+                origin-left
+                transition-transform
+                duration-300
+                group-hover:scale-x-100
+            "
+        />
 
-                {/* ================= SIDEBAR ================= */}
-                <aside className="w-full lg:w-[320px] bg-white mt-4 lg:p-4 lg:mt-0 shrink-0">
-                    <div className="lg:sticky lg:top-20 h-[calc(100vh-80px)] overflow-hidden">
-                        <div className="p-6 space-y-6 bg-green-800 text-white rounded h-full flex flex-col">
+        <span className="relative flex items-center gap-2">
+            <Lock size={16} />
+            Login
+        </span>
+    </Link>
 
-                            {/* DOWNLOAD TEXT */}
-                            <div>
-                                <h1 className="text-2xl font-bold">Download</h1>
-                                <p className="text-sm mt-2">
-                                    Our most recent catalogue, manuals and external dimension views can be downloaded.
-                                </p>
-                            </div>
+    <button
+        onClick={() => router.push("/register")}
+        className="
+            group
+            relative
+            overflow-hidden
+            flex
+            items-center
+            justify-center
+            gap-2
+            h-10
+            rounded-xl
+            bg-blue-600
+            text-white
+            font-medium
+            border
+            border-blue-500
+            shadow-sm
+            hover:shadow-lg
+            hover:-translate-y-0.5
+            transition-all
+            duration-300
+            cursor-pointer
+        "
+    >
+        <span
+            className="
+                absolute
+                inset-0
+                bg-blue-700
+                scale-x-0
+                origin-left
+                transition-transform
+                duration-300
+                group-hover:scale-x-100
+            "
+        />
 
-                            <hr className="border-white/30" />
-
-                            {/* CATEGORY LIST — flex-1 se poora space lega */}
-                            <div className="flex flex-col flex-1 min-h-0">
-                                <h3 className="text-xl font-semibold mb-3">
-                                    List of Download Files
-                                </h3>
-
-                                <div className="flex flex-col gap-2 h-[470px] overflow-y-auto pr-2 space-y-2 custom-scrollbar">
-                                    {categories.map((item) => (
-                                        <Link
-                                            key={item.id}
-                                            href="/products-list"
-                                            className="flex items-center justify-between bg-white text-black px-3 py-2 rounded-lg border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <img
-                                                    src={
-                                                        item.images?.length > 0 && item.images[0]?.image_url
-                                                            ? `${api.image.imageURL}${item.images[0].image_url}`
-                                                            : "/images/default.png"
-                                                    }
-                                                    alt={item.title}
-                                                    width={80}
-                                                    height={80}
-                                                    className="object-contain rounded w-12 h-12 flex-shrink-0"
-                                                />
-                                                {item.title}
+        <span className="relative flex items-center gap-2">
+            <SquarePen size={16} />
+            Register
+        </span>
+    </button>
+</div>
+                                        ) : (
+                                            <div className="text-center space-y-2">
+                                                <p className="font-semibold mt-2">Welcome</p>
+                                                <p>{user.name}</p>
+                                                <button onClick={handleLogout} className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-800 cursor-pointer">Logout</button>
                                             </div>
+                                        )}
+                                    </div>
+                                    <hr className="border-white/30" />
+                                     <div>
+                            <h2 className="text-lg font-bold text-white leading-none">
+                                Downloads
+                            </h2>
 
-                                            <ChevronsRight />
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <hr className="border-white/30" />
-
-                            {/* AUTH — NEECHE FIXED */}
-                            <div className="bg-white text-black p-4 rounded shadow">
-                                <div className="flex flex-col gap-2">
-                                    <button
-                                        onClick={() => router.push("/login")}
-                                        className="bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
-                                    >
-                                        Login
-                                    </button>
-                                    <button
-                                        onClick={() => router.push("/register")}
-                                        className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-                                    >
-                                        Register
-                                    </button>
-                                </div>
-                            </div>
-
+                            <p className="text-xs text-green-100 mt-1 leading-relaxed">
+                                Our most recent catalogue, manuals and external dimension views can be downloaded.
+                            </p>
                         </div>
+                                    <hr className="border-white/30" />
+                                    {/*<div className="flex flex-col flex-1 ">
+                                        <h3 className="text-xl font-semibold mb-3">List of Download Files</h3>
+                                        <div className="flex flex-col gap-2  space-y-2  overflow-y-auto pr-1 custom-scrollbar ">
+                                            {categories.map((item) => (
+                                                <Link
+                                                    key={item.id}
+                                                    href="/products-list"
+                                                    className="flex items-center justify-between bg-white text-black px-2 lg:px-2 rounded-md
+                        border border-gray-200 shadow-sm  hover:shadow-md hover:-translate-y-0.5 transition"
+                                                >
+                                                    <div className="flex  items-center gap-4">
+                                                        <img
+                                                            src={
+                                                                item.images?.length > 0 && item.images[0]?.image_url
+                                                                    ? `${api.image.imageURL}${item.images[0].image_url}`
+                                                                    : "/images/default.png"
+                                                            }
+                                                            alt={item.title}
+                                                            width={70}
+                                                            height={70}
+                                                            className="object-contain rounded w-14 lg:w-12 h-auto"
+                                                        />
+                                                        <h3 className="text-[14px] lg:text-[13px] font-semibold px-2  rounded cursor-pointer transition">
+                                                            {item.title}
+                                                        </h3>
+                                                    </div>
+ 
+                                                    <ChevronsRight />
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>*/}
+                                    <div className="flex flex-col flex-1">
+    <div className="flex items-center justify-between mb-3">
+        <h3 className="text-lg font-bold text-white">
+            List of Download Files
+        </h3>
+
+        <span className="text-xs bg-white/10 text-white px-2 py-1 rounded-full">
+            {categories.length}
+        </span>
+    </div>
+
+    <div className="flex flex-col gap-2 overflow-y-auto custom-scrollbar">
+        {categories.map((item) => (
+            <Link
+                key={item.id}
+                href="/products-list"
+                className="
+                    group
+                    flex
+                    items-center
+                    justify-between
+                    bg-white
+                    rounded-xl
+                    p-1
+                    border
+                    border-gray-100
+                    shadow-sm
+                    hover:shadow-lg
+                    hover:border-green-200
+                    transition-all
+                    duration-300
+                    hover:-translate-y-0.5
+                "
+            >
+                <div className="flex items-center gap-3 min-w-0">
+                    <div
+                        className="
+                            h-12
+                            w-12
+                            rounded-lg
+                            bg-slate-50
+                            border
+                            border-slate-100
+                            flex
+                            items-center
+                            justify-center
+                            overflow-hidden
+                            shrink-0
+                        "
+                    >
+                        <img
+                            src={
+                                item.images?.length > 0 &&
+                                item.images[0]?.image_url
+                                    ? `${api.image.imageURL}${item.images[0].image_url}`
+                                    : "/images/default.png"
+                            }
+                            alt={item.title}
+                            width={48}
+                            height={48}
+                            className="
+                                h-10
+                                w-10
+                                object-contain
+                                transition-transform
+                                duration-300
+                                group-hover:scale-110
+                            "
+                        />
                     </div>
-                </aside>
 
-                {/* ================= MAIN CONTENT ================= */}
-                <main className="flex-1 p-4 mt-16">
-                    {/* <div className="mb-4">
-                        <a
-                            href="https://www.unipulseindia.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:text-green-700 transition-all duration-200"
+                    <div className="min-w-0">
+                        <h4
+                            className="
+                                text-sm
+                                font-semibold
+                                text-gray-800
+                                
+                                group-hover:text-green-700
+                                transition-colors
+                            "
                         >
-                            ← Go Back
-                        </a>
-                    </div> */}
-                    <h1 className="text-3xl font-bold text-gray-800 leading-snug mb-2">
-                        {aboutData?.title}{" "}
+                            {item.title}
+                        </h4>
 
-                        <span className="text-green-700">
-                            {aboutData?.highlight_title}
-                        </span>
-                    </h1>
+                        <p className="text-[11px] text-gray-500">
+                            Download File
+                        </p>
+                    </div>
+                </div>
 
-                    <p className="text-gray-600 text-base leading-7 mb-4">
-                        {aboutData?.sub_title}
-                    </p>
-
-
-                    <div className="border border-gray-300 mb-10 rounded bg-white p-10">
-
-                        {/* <div className="bg-gray-200 px-4 py-2 mb-6 border-l-4 border-green-700">
-                            <h3 className="text-lg font-semibold text-gray-700">
-                                Product category
-                            </h3>
-                        </div> */}
-                        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 text-center">
-                            {categories.map((item) => (
-                                <Link
-                                    key={item.id}
-                                    href="/products-list"
-                                    className="group flex flex-col items-center cursor-pointer border border-gray-200 p-5 rounded-md transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1"
+                <div
+                    className="
+                        h-8
+                        w-8
+                        rounded-full
+                        bg-green-50
+                        flex
+                        items-center
+                        justify-center
+                        shrink-0
+                        group-hover:bg-green-600
+                        transition-all
+                    "
+                >
+                    <ChevronsRight
+                        size={16}
+                        className="
+                            text-green-700
+                            group-hover:text-white
+                            group-hover:translate-x-0.5
+                            transition-all
+                        "
+                    />
+                </div>
+            </Link>
+        ))}
+    </div>
+</div>
+                                    {/*<hr className="border-white/30" />*/}
+ 
+                                </div>
+                            </div>
+                        </aside>
+ 
+                        {/* ================= MAIN CONTENT ================= */}
+                        <main className="order-1 lg:order-2 md:col-span-8 lg:col-span-8 xl:col-span-9 space-y-4 px-4 lg:px-2 lg:p-4 mt-2 xl:mt-9">
+ 
+                            <h1 className="lg:text-2xl text-[22px] font-bold text-gray-800 leading-snug mb-2">
+                                {aboutData?.title}{" "}
+ 
+                                <span className="text-green-700 ">
+                                    {aboutData?.highlight_title}
+                                </span>
+                            </h1>
+ 
+                            <p className="text-gray-600 leading-8 text-sm sm:text-[15px] ">
+                                {aboutData?.sub_title}
+                            </p>
+ 
+ 
+                            <div className="border border-gray-300 mb-6 rounded bg-white p-2">
+ 
+ 
+ 
+                                <Swiper
+                                    modules={[Autoplay, Pagination]}
+                                    slidesPerView={1}
+                                    loop={true}
+                                    autoplay={{
+                                        delay: 3000,
+                                        disableOnInteraction: false,
+                                    }}
+                                    pagination={{ clickable: true }}
+                                    className="!w-full mx-auto"
                                 >
-                                    <img
-                                        src={
-                                            item.images?.length > 0 && item.images[0]?.image_url
-                                                ? `${api.image.imageURL}${item.images[0].image_url}`
-                                                : "/images/default.png"
-                                        }
-                                        alt={item.title}
-                                        className="h-20 object-contain mb-4 transition-all duration-300 ease-in-out group-hover:scale-110"
-                                    />
-                                    <p className="text-sm font-semibold text-green-800 transition-all duration-300 group-hover:text-red-800">
-                                        {item.title}
-                                    </p>
-                                </Link>
-                            ))}
-                        </div> */}
+ 
+                                    {bannerSlides.map((slide, index) => (
+ 
+                                        <SwiperSlide key={index}>
+                                            <img
+                                                src={`${api.image.imageURL}${slide.image}`}
+                                                alt={`Banner ${index + 1}`}
+                                                className="lg:w-full lg:h-full object-cover  rounded-lg"
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
+ 
+ 
+                          <div className="bg-white border border-gray-100 rounded shadow-sm overflow-hidden">
+    {/* Header */}
+    <div className="flex items-center gap-3 px-4 sm:px-4 py-4 border-b border-gray-100">
+        <div className="w-1 h-8 bg-green-600 rounded-full" />
 
-                        <Swiper
-                            modules={[Autoplay, Pagination]}
-                            slidesPerView={1}
-                            loop={true}
-                            autoplay={{
-                                delay: 3000,
-                                disableOnInteraction: false,
-                            }}
-                            pagination={{ clickable: true }}
-                            className="w-full max-w-[900px] mx-auto"
-                        >
+        <div>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">
+                About Us
+            </h2>
 
-                            {bannerSlides.map((slide, index) => (
+            <p className="text-xs text-gray-500">
+                Learn more about our company
+            </p>
+        </div>
+    </div>
 
-                                <SwiperSlide key={index}>
-                                    <img
-                                        src={`${api.image.imageURL}${slide.image}`}
-                                        alt={`Banner ${index + 1}`}
-                                        className="w-full h-[300px]  object-fill rounded-lg"
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+    {/* Content */}
+    <div className="px-4 sm:px-6 py-4">
+        <div className="space-y-4">
+            {aboutData?.description
+                ?.split("\n")
+                .filter((item) => item.trim() !== "")
+                .map((para, index) => (
+                    <p
+                        key={index}
+                        className="
+                            text-gray-600
+                            leading-7
+                            text-[15px]
+                            
+                        "
+                    >
+                        {para}
+                    </p>
+                ))}
+        </div>
+    </div>
+</div>
+ 
+                        </main>
+ 
+ 
                     </div>
-
-
-                    <div className="bg-white border border-gray-200  p-6 sm:p-8">
-                        <div className="flex items-center justify-between mb-5">
-                            <span className="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-2 rounded-full">
-                                About Us
-                            </span>
-
-                            <a
-                                href="https://www.unipulseindia.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition inline-block cursor-pointer"
-                            >
-                                Go Back to Unipulse India
-                            </a>
-                        </div>
-
-                        {/* <h2 className="text-gray-600 leading-8 text-sm sm:text-base mb-5">
-
-                            {aboutData?.title}
-
-                        </h2> */}
-
-                        <div className="space-y-5">
-
-                            {aboutData?.description
-                                ?.split("\n")
-                                .filter((item) => item.trim() !== "")
-                                .map((para, index) => (
-
-                                    <p
-                                        key={index}
-                                        className="text-gray-600 leading-8 text-sm sm:text-base"
-                                    >
-
-                                        {para}
-
-                                    </p>
-
-                                ))}
-
-                        </div>
-
-                    </div>
-
-                </main>
-
-
-            </div>
-        </section >
+                </div>
+            </section >
+            <ContactButtonright />
+        </>
     );
 }

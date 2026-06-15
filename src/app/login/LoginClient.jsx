@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { api } from "../apis/apiList";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { ChevronsRight } from "lucide-react";
 import { toast } from "react-toastify";
 import {
   setToken,
@@ -16,6 +15,8 @@ import {
   removeRedirectPath,
 } from "../../helper/getCommonData";
 import Link from "next/link";
+import CategorySideBar from "../component/CategorySideBar";
+import ContactButtonright from "../component/ContactButtonright";
 
 export default function LoginForm({ categories }) {
   useUserLoginRedirect();
@@ -36,6 +37,20 @@ export default function LoginForm({ categories }) {
       toast.success("Email verified successfully! You can login now.");
     }
   }, []);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      const form = document.getElementById("login-form");
+      if (form) {
+        setTimeout(() => {
+          const y = form.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 100); // thoda wait karo taaki page render ho jaye
+      }
+    }
+  }, []);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -124,176 +139,116 @@ export default function LoginForm({ categories }) {
   };
 
   return (
-    <section>
-      <div className="flex flex-col lg:flex-row min-h-screen max-w-7xl mx-auto">
+  <>
+    <section className="pt-6" >
+      <div className="container mx-auto min-h-screen">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2  md:grid-cols-12">
 
-        {/* ================= SIDEBAR ================= */}
-        <aside className="w-full lg:w-[380px] bg-white mt-4 lg:p-4 lg:mt-0">
-          <div className="lg:sticky lg:top-20 h-[calc(100vh-80px)] overflow-hidden">
-            <div className="p-6 space-y-6 bg-green-800 text-white rounded h-full flex flex-col">
+          {/* ================= SIDEBAR ================= */}
+          <CategorySideBar categories={categories} />
 
-              {/* DOWNLOAD TEXT */}
-              <div>
-                <h1 className="text-2xl font-bold">Download</h1>
-                <p className="text-sm mt-2">
-                  Our most recent catalogue, manuals and external dimension views can be downloaded.
-                </p>
-              </div>
 
-              <hr className="border-white/30" />
+          {/* ================= LOGIN FORM ================= */}
+          <main id="login-form" className="md:col-span-8 lg:col-span-8 xl:col-span-9 space-y-6 p-4 mt-2 xl:mt-16 flex items-center justify-center">
+            <div className="bg-gray-100 p-8 rounded-lg shadow-md w-full max-w-xl">
 
-              {/* CATEGORY LIST */}
-              <div className="flex flex-col flex-1 min-h-0">
-                <h3 className="text-xl font-semibold mb-3">
-                  List of Download Files
-                </h3>
-                <div className="flex flex-col gap-2 overflow-y-auto pr-1 custom-scroll flex-1">
-                  {categories?.map((item) => (
-                    <Link
-                      key={item.id}
-                      href="/products-list"
-                      className="flex items-center justify-between bg-white text-black px-3 py-1 rounded-lg  
-                        border border-gray-200 shadow-sm  hover:shadow-md hover:-translate-y-0.5 transition "
-                    >
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={
-                            item.images?.length > 0 && item.images[0]?.image_url
-                              ? `${api.image.imageURL}${item.images[0].image_url}`
-                              : "/images/default.png"
-                          }
-                          alt={item.title}
-                          width={80}
-                          height={80}
-                          className="object-contain rounded w-20 h-auto"
-                        />
-                        {item.title}
-                      </div>
+              <h2 className="text-2xl font-bold mb-6 text-center  ">
+                User Login
+              </h2>
 
-                      <ChevronsRight />
-                    </Link>
-                  ))}
+              <form onSubmit={handleLogin} className="space-y-4">
+
+                {/* EMAIL */}
+                <div>
+                  <label className="block text-gray-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setErrors((prev) => ({ ...prev, email: "" }));
+                    }}
+                    placeholder="you@example.com"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  )}
                 </div>
-              </div>
 
-              <hr className="border-white/30" />
-
-              {/* AUTH BUTTONS */}
-              <div className="bg-white text-black p-4 rounded shadow">
-                <div className="flex flex-col gap-2">
-                  <button
-                    onClick={() => router.push("/login")}
-                    className="bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
-                  >
-                    Login
-                  </button>
-                  <button
-                    onClick={() => router.push("/register")}
-                    className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-                  >
-                    Register
-                  </button>
+                {/* PASSWORD */}
+                <div>
+                  <label className="block text-gray-700 mb-1">Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setErrors((prev) => ({ ...prev, password: "" }));
+                    }}
+                    placeholder="********"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+                  />
+                  {errors.password && (
+                    <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+                  )}
                 </div>
-              </div>
 
-            </div>
-          </div>
-        </aside>
-
-        {/* ================= LOGIN FORM ================= */}
-        <main className="flex-1 flex items-center justify-center p-4 bg-gray-100">
-          <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-
-            <h2 className="text-2xl font-bold mb-6 text-center">
-              User Login
-            </h2>
-
-            <form onSubmit={handleLogin} className="space-y-4">
-
-              {/* EMAIL */}
-              <div>
-                <label className="block text-gray-700 mb-1">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrors((prev) => ({ ...prev, email: "" }));
-                  }}
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                {/* GENERAL ERROR */}
+                {errors.general && (
+                  <p className="text-red-500 text-sm text-center">
+                    {errors.general}
+                  </p>
                 )}
-              </div>
 
-              {/* PASSWORD */}
-              <div>
-                <label className="block text-gray-700 mb-1">Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setErrors((prev) => ({ ...prev, password: "" }));
-                  }}
-                  placeholder="********"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-                />
-                {errors.password && (
-                  <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-                )}
-              </div>
+                {/* SUBMIT BUTTON */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+                >
+                  {loading ? "Logging in..." : "Login"}
+                </button>
 
-              {/* GENERAL ERROR */}
-              {errors.general && (
-                <p className="text-red-500 text-sm text-center">
-                  {errors.general}
-                </p>
-              )}
-
-              {/* SUBMIT BUTTON */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-
-              {/* REGISTER LINK */}
-              <Link
-                href="/register"
-                className="block text-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-              >
-                User Registration
-              </Link>
-
-              <p className="text-sm text-center mt-2">
-                Don't have an account?{" "}
+                {/* REGISTER LINK */}
                 <Link
                   href="/register"
-                  className="text-green-600 hover:underline cursor-pointer"
+                  className="block text-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
                 >
-                  Sign up
+                  User Registration
                 </Link>
-              </p>
 
-              <p className="text-sm text-center">
-                <Link
-                  href="/forgot-password"
-                  className="text-green-600 hover:underline"
-                >
-                  Forgot password?
-                </Link>
-              </p>
+                <p className="text-sm text-center mt-2">
+                  Don't have an account?{" "}
+                  <Link
+                    href="/register"
+                    className="text-green-600 hover:underline cursor-pointer"
+                  >
+                    Sign up
+                  </Link>
+                </p>
 
-            </form>
-          </div>
-        </main>
+                <p className="text-sm text-center">
+                  <Link
+                    href="/forgot-password"
+                    className="text-green-600 hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+                </p>
+
+              </form>
+            </div>
+          </main>
+        </div>
 
       </div>
     </section>
+
+        <ContactButtonright />
+  
+  
+  
+  </>
   );
 }

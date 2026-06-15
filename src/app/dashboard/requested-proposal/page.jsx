@@ -42,87 +42,94 @@ export default function RequestedProposal() {
         fetchProposals(currentPage);
     }, [currentPage]);
 
-    // const handleDelete = async (id) => {
-    //     if (!confirm('Are you sure you want to delete?')) return;
 
-    //     try {
-    //         const res = await fetch(`${api.apiCall.requestPurposalDelete}${id}`, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 Authorization: `Bearer ${getToken()}`,
-    //                 Accept: 'application/json',
-    //             },
-    //         });
-
-    //         const json = await res.json();
-
-    //         if (res.ok) {
-    //             toast.success('Deleted successfully!');
-    //             fetchProposals(currentPage); // list reload
-    //         } else {
-    //             toast.error(json.message || 'Error');
-    //         }
-    //     } catch (err) {
-    //         console.error(err);
-    //         toast.error('Server error');
-    //     }
-    // };
 
     return (
         <>
             <div className="flex justify-between items-center mb-2">
-                <h2 className="text-2xl font-semibold text-white bg-green-700 px-4 py-2">
+                <h2 className="text-xl font-semibold text-white bg-green-700 px-4 py-2 rounded-lg">
                     Requested Proposals
                 </h2>
             </div>
 
-            <table className="w-full border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow-lg">
-                <thead className="bg-[#b3ffd3]">
-                    <tr>
-                        <th className="border px-4 py-2 text-center">S.No</th>
-                        <th className="border px-4 py-2 text-left">Name</th>
-                        <th className="border px-4 py-2 text-left">Related Product</th>
-                        <th className="border px-4 py-2 text-center">Requested For</th>
-                        <th className="border px-4 py-2 text-center">Serial No</th>
-                        <th className="border px-4 py-2 text-center">Message</th>
-                        <th className="border px-4 py-2 text-center">Date</th>
-                        {/* <th className="border px-4 py-2 text-center">Action</th> */}
+            <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
+                    <thead className="bg-[#b3ffd3]">
+                        {/*<tr>
+                        <th className="border px-4 py-2 text-center  ">S.No</th>
+                        <th className="border px-4 py-2 text-left ">Name</th>
+                        <th className="border px-4 py-2 text-left ">Related Product</th>
+                        <th className="border px-4 py-2 text-center ">Requested For</th>
+                        <th className="border px-4 py-2 text-center ">Serial No</th>
+                        <th className="border px-4 py-2 text-center ">Message</th>
+                        <th className="border px-4 py-2 text-center ">Date</th>
+                       
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {proposals.length > 0 ? (
-                        proposals.map((item, index) => (
-                            <tr key={item.id} className="hover:bg-gray-50">
-                                <td className="border px-4 py-2 text-center">
-                                    {(currentPage - 1) * itemsPerPage + index + 1}
-                                </td>
-                                <td className="border px-4 py-2">{item.name}</td>
-                                <td className="border px-4 py-2">{item.related_product}</td>
-                                <td className="border px-4 py-2 text-center">
-                                    <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">
-                                        {item.request_for}
-                                    </span>
-                                </td>
-                                <td className="border px-4 py-2 text-center">{item.serial_no}</td>
-                                <td className="border px-4 py-2 text-center max-w-[200px] truncate">
-                                    {item.message}
-                                </td>
-                                <td className="border px-4 py-2 text-center">
-                                    <div className="flex flex-col">
-                                        <span>
-                                            {new Date(item.created_at).toLocaleDateString("en-IN")}
-                                        </span>
+                    </tr>*/}
 
-                                        <span className="text-xs text-gray-500">
-                                            {new Date(item.created_at).toLocaleTimeString("en-IN", {
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                            })}
+                        <tr>
+                            <th className="border px-2 md:px-2 py-2 text-center w-[5%]">S.No</th>
+
+                            <th className="border px-2 md:px-2 py-2 text-left w-[20%] md:w-[18%]">
+                                Name
+                            </th>
+
+                            <th className="border px-2 md:px-2 py-2 text-left w-[15%] md:w-[22%]">
+                                Related Product
+                            </th>
+
+                            <th className="border px-2 md:px-2 py-2 text-center w-[5%] md:w-[15%]">
+                                Requested For
+                            </th>
+
+                            <th className="border px-2 md:px-2 py-2 text-center w-[30%] md:w-[12%]">
+                                Serial No
+                            </th>
+
+                            <th className="border px-2 md:px-2 py-2 text-center w-[1%] md:w-[18%]">
+                                Message
+                            </th>
+
+                            <th className="border px-2 md:px-2 py-2 text-center w-[25%] md:w-[15%]">
+                                Date
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        {proposals.length > 0 ? (
+                            proposals.map((item, index) => (
+                                <tr key={item.id} className="hover:bg-gray-50">
+                                    <td className="border px-2 py-2 text-center">
+                                        {(currentPage - 1) * itemsPerPage + index + 1}
+                                    </td>
+                                    <td className="border px-2 py-2 whitespace-nowrap">{item.name}</td>
+                                    <td className="border px-2 py-2">{item.related_product}</td>
+                                    <td className="border px-2 py-2 text-center">
+                                        <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">
+                                            {item.request_for}
                                         </span>
-                                    </div>
-                                </td>
-                                {/* <td className="border px-4 py-2 text-center">
+                                    </td>
+                                    <td className="border px-2 py-2 text-center">{item.serial_no}</td>
+                                    <td className="border px-2 py-2 text-center max-w-[200px] truncate">
+                                        {item.message}
+                                    </td>
+                                    <td className="border px-2 py-2 text-center">
+                                        <div className="flex flex-col">
+                                            <span>
+                                                {new Date(item.created_at).toLocaleDateString("en-IN")}
+                                            </span>
+
+                                            <span className="text-xs text-gray-500">
+                                                {new Date(item.created_at).toLocaleTimeString("en-IN", {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                })}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    {/* <td className="border px-4 py-2 text-center">
                                     <button
                                         onClick={() => handleDelete(item.id)}
                                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-xs"
@@ -131,17 +138,18 @@ export default function RequestedProposal() {
                                     </button>
                                 </td> */}
 
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="text-center p-4">
+                                    {loading ? 'Loading...' : 'No data found'}
+                                </td>
                             </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="6" className="text-center p-4">
-                                {loading ? 'Loading...' : 'No data found'}
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                        )}
+                    </tbody>
+                </table>
+            </div>
 
             <Pagination
                 currentPage={currentPage}

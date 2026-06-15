@@ -10,15 +10,7 @@ export default function Footer() {
             <li>
               <Link href="/">Home</Link>
             </li>
-            {/* <li>
-              <Link href="/">Product Information</Link>
-            </li> */}
-            {/* <li>
-              <Link href="/">Corporate Information</Link>
-            </li> */}
-            {/* <li>
-              <Link href="/">Site Map</Link>
-            </li> */}
+           
             <li>
               <Link href="/privacy-policy">Privacy Policy</Link>
             </li>
@@ -43,14 +35,14 @@ export default function Footer() {
 
           <p>
             Website Design by{" "}
-            <a
+            <Link
               href="http://www.infiniteitsolutions.net/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:underline"
             >
               Infinite IT Solutions
-            </a>
+            </Link>
           </p>
         </div>
       </div>

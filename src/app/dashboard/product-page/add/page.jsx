@@ -8,11 +8,11 @@ export default function AddProductPage() {
     useAuthGuard();
     // const [activeTab, setActiveTab] = useState("category");
     return (
-        <section className="bg-gray-100 relative min-h-screen py-0 px-15">
+        <section className="bg-gray-100 relative py-0 px-0 lg:px-4 ">
 
             <div className="flex max-w-full mx-auto gap-5">
                 {/* <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} /> */}
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-1 ">
                     <ProductForm />
 
                 </main>
