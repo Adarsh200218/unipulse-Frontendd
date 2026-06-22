@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { api } from "../apis/apiList";
 import { getToken, useAuthGuard } from "../../helper/getCommonData";
 import { toast } from "react-toastify";
+import Link from 'next/link';
 
 
 export default function ProductForm({ productId = null }) {
@@ -96,6 +94,7 @@ export default function ProductForm({ productId = null }) {
                         status: data.status == 1 ? "active" : "inactive",
                         pdf: null,
                     }));
+
                     setExistingPdf(data.pdf || "");
                 }
 
@@ -398,7 +397,7 @@ export default function ProductForm({ productId = null }) {
                             <div className="mt-2 flex items-center gap-2">
                                 <span className="text-sm text-gray-600">Current File:</span>
                                 <Link
-                                    href={``}
+                                    href={`${api.image.imageURL}${existingPdf}`}
                                     target="_blank"
                                     className="text-blue-600 underline"
                                 >
@@ -436,7 +435,7 @@ export default function ProductForm({ productId = null }) {
                     {/* Submit */}
                     <button
                         type="submit"
-                        className="col-span-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-xl hover:from-green-600 hover:to-emerald-700 transition duration-300 shadow-md font-semibold text-lg"
+                        className="col-span-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-xl hover:from-green-600 hover:to-emerald-700 transition duration-300 shadow-md font-semibold text-lg cursor-pointer"
                     >
                         Submit
                     </button>

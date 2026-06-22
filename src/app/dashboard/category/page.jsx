@@ -205,9 +205,9 @@ export default function CategoryListPage() {
                     totalPages={totalPages}
                     onPageChange={(page) => setCurrentPage(page)}
                 />
-                </div>
-            </>
-            );
+            </div>
+        </>
+    );
 }
 
 

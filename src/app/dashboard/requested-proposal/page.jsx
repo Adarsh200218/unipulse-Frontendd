@@ -111,8 +111,8 @@ export default function RequestedProposal() {
                                             {item.request_for}
                                         </span>
                                     </td>
-                                    <td className="border px-2 py-2 text-center">{item.serial_no}</td>
-                                    <td className="border px-2 py-2 text-center max-w-[200px] truncate">
+                                    <td className="border px-2 py-2 text-center">{item.serial_no || "N/A"}</td>
+                                    <td className="border px-2 py-2 text-center max-w-[200px] break-words">
                                         {item.message}
                                     </td>
                                     <td className="border px-2 py-2 text-center">
@@ -121,7 +121,7 @@ export default function RequestedProposal() {
                                                 {new Date(item.created_at).toLocaleDateString("en-IN")}
                                             </span>
 
-                                            <span className="text-xs text-gray-500">
+                                            <span className="text-xs ">
                                                 {new Date(item.created_at).toLocaleTimeString("en-IN", {
                                                     hour: "2-digit",
                                                     minute: "2-digit",

@@ -44,7 +44,7 @@ export default function ProductQueryPage() {
             });
 
             const data = await res.json();
-            console.log("last_page:", data.pagination?.last_page); // 5 aana chahiye
+            // console.log("last_page:", data.pagination?.last_page); // 5 aana chahiye
             setLogs(Array.isArray(data.data) ? data.data : []);
             setTotalPages(data.pagination?.last_page || 1); // ✅
 
@@ -146,7 +146,7 @@ export default function ProductQueryPage() {
                 </h2>
 
                 {/* ✅ Right side Date Filter */}
-                <div className="flex items-center gap-2 flex-col lg:flex-row ">
+                <div className="flex items-center gap-2 flex-col lg:flex-row">
 
                     {/* ✅ Dropdown Filter */}
                     <select
@@ -206,81 +206,81 @@ export default function ProductQueryPage() {
             </div>
 
 
-           <div className="overflow-x-auto">
+            <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
-                <thead className="bg-[#b3ffd3]">
-                    <tr>
-                        <th className="border px-2 py-2 text-center">S.No</th>
-                        <th className="border px-2 py-2 text-left">Visited User</th>
-                        <th className="border px-2 py-2 text-left">Product Name</th>
-                        <th className="border px-2 py-2 text-center">Catalogue</th>
-                        <th className="border px-2 py-2 text-center">Manual</th>
-                        <th className="border px-2 py-2 text-center">Price</th>
-                        {/* <th className="border px-4 py-2 text-center">Proposal</th> */}
-                        <th className="border px-2 py-2 text-center">Date</th>
-                        {/* <th className="border px-4 py-2 text-center">Action</th> */}
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {loading ? (
+                    <thead className="bg-[#b3ffd3]">
                         <tr>
-                            <td colSpan="9" className="text-center p-4">Loading...</td>
+                            <th className="border px-2 py-2 text-center">S.No</th>
+                            <th className="border px-2 py-2 text-left">Visited User</th>
+                            <th className="border px-2 py-2 text-left">Product Name</th>
+                            <th className="border px-2 py-2 text-center">Catalogue</th>
+                            <th className="border px-2 py-2 text-center">Manual</th>
+                            <th className="border px-2 py-2 text-center">Price</th>
+                            {/* <th className="border px-4 py-2 text-center">Proposal</th> */}
+                            <th className="border px-2 py-2 text-center">Date</th>
+                            {/* <th className="border px-4 py-2 text-center">Action</th> */}
                         </tr>
-                    ) : logs.length > 0 ? (
-                        logs.map((log, i) => (
-                            <tr key={log.id} className="hover:bg-gray-50">
+                    </thead>
 
-                                {/* S.No — pagination aware */}
-                                <td className="border px-2 py-2 text-center">
-                                    {(currentPage - 1) * itemsPerPage + i + 1}
-                                </td>
+                    <tbody>
+                        {loading ? (
+                            <tr>
+                                <td colSpan="9" className="text-center p-4">Loading...</td>
+                            </tr>
+                        ) : logs.length > 0 ? (
+                            logs.map((log, i) => (
+                                <tr key={log.id} className="hover:bg-gray-50">
 
-                                {/* Visited Client */}
-                                <td className="border px-2 py-2">
-                                    <p className="font-semibold">{log.user?.name || "—"}</p>
-                                </td>
+                                    {/* S.No — pagination aware */}
+                                    <td className="border px-2 py-2 text-center">
+                                        {(currentPage - 1) * itemsPerPage + i + 1}
+                                    </td>
 
-                                {/* Product Name */}
-                                <td className="border px-2 py-2">
-                                    {log.product?.product_name || "—"}
-                                </td>
+                                    {/* Visited Client */}
+                                    <td className="border px-2 py-2">
+                                        <p className="font-semibold">{log.user?.name || "—"}</p>
+                                    </td>
 
-                                {/* Catalogue */}
-                                <td className="border px-2 py-2 text-center">
-                                    {log.catalogue ? (
-                                        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">
-                                            ✓ Yes
-                                        </span>
-                                    ) : (
-                                        <span className="text-gray-400">—</span>
-                                    )}
-                                </td>
+                                    {/* Product Name */}
+                                    <td className="border px-2 py-2">
+                                        {log.product?.product_name || "—"}
+                                    </td>
 
-                                {/* Manual */}
-                                <td className="border px-2 py-2 text-center">
-                                    {log.manual ? (
-                                        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-semibold">
-                                            ✓ Yes
-                                        </span>
-                                    ) : (
-                                        <span className="text-gray-400">—</span>
-                                    )}
-                                </td>
+                                    {/* Catalogue */}
+                                    <td className="border px-2 py-2 text-center">
+                                        {log.catalogue ? (
+                                            <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">
+                                                ✓ Yes
+                                            </span>
+                                        ) : (
+                                            <span className="text-gray-400">—</span>
+                                        )}
+                                    </td>
 
-                                {/* Price */}
-                                <td className="border px-2 py-2 text-center">
-                                    {log.price ? (
-                                        <span className="bg-amber-100 text-amber-700 px-2 py-1 rounded lg:text-xs  text-[10px] font-semibold">
-                                            ✓ Yes
-                                        </span>
-                                    ) : (
-                                        <span className="text-gray-400">—</span>
-                                    )}
-                                </td>
+                                    {/* Manual */}
+                                    <td className="border px-2 py-2 text-center">
+                                        {log.manual ? (
+                                            <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-semibold">
+                                                ✓ Yes
+                                            </span>
+                                        ) : (
+                                            <span className="text-gray-400">—</span>
+                                        )}
+                                    </td>
 
-                                {/* Proposal */}
-                                {/* <td className="border px-4 py-2 text-center">
+                                    {/* Price */}
+                                    <td className="border px-2 py-2 text-center">
+                                        {log.price ? (
+                                            <span className="bg-amber-100 text-amber-700 px-2 py-1 rounded lg:text-xs  text-[10px] font-semibold">
+                                                ✓ Yes
+                                            </span>
+                                        ) : (
+                                            <span className="text-gray-400">—</span>
+                                        )}
+                                    </td>
+
+                                    {/* Proposal */}
+                                    {/* <td className="border px-4 py-2 text-center">
                                     {log.proposal ? (
                                         <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold">
                                             ✓ Yes
@@ -290,13 +290,13 @@ export default function ProductQueryPage() {
                                     )}
                                 </td> */}
 
-                                {/* Date */}
-                                <td className="border px-2 lg:px-4 py-2 text-center text-xs text-gray-500">
-                                    {new Date(log.created_at).toLocaleString("en-IN")}
-                                </td>
+                                    {/* Date */}
+                                    <td className="border px-2 lg:px-4 py-2 text-center text-xs">
+                                        {new Date(log.created_at).toLocaleString("en-IN")}
+                                    </td>
 
-                                {/*Delete Pencil Icon*/}
-                                {/* <td className="border p-2 text-center">
+                                    {/*Delete Pencil Icon*/}
+                                    {/* <td className="border p-2 text-center">
                                     <button
                                         onClick={() => handleDelete(log.id)}
                                         className="bg-red-500 text-white px-3 py-2 rounded"
@@ -305,15 +305,15 @@ export default function ProductQueryPage() {
                                     </button>
                                 </td> */}
 
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="9" className="text-center p-4">No Inquiry found</td>
                             </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="9" className="text-center p-4">No Inquiry found</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                        )}
+                    </tbody>
+                </table>
             </div>
 
             <Pagination
