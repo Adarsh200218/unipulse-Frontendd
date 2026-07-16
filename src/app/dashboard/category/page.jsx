@@ -7,12 +7,13 @@ import { getToken, useAuthGuard } from "../../../helper/getCommonData";
 import { Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { toast } from "react-toastify";
 import Pagination from "../../component/pagination";
+import Loader from "@/app/component/Loader";
 
 export default function CategoryListPage() {
     useAuthGuard();
 
     const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -191,7 +192,7 @@ export default function CategoryListPage() {
                         ) : (
                             <tr>
                                 <td colSpan="6" className="text-center p-4">
-                                    {loading ? "Loading..." : "No data found"}
+                                    {loading ? <Loader /> : "No data found"}
                                 </td>
                             </tr>
                         )}
@@ -205,9 +206,9 @@ export default function CategoryListPage() {
                     totalPages={totalPages}
                     onPageChange={(page) => setCurrentPage(page)}
                 />
-                </div>
-            </>
-            );
+            </div>
+        </>
+    );
 }
 
 

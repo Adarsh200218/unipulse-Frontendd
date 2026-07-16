@@ -107,7 +107,6 @@ export default function InqueryForm({ categories }) {
         const newErrors = {};
         if (!form.requestFor.trim()) newErrors.requestFor = 'Request For is required';
         if (!form.relatedProduct.trim()) newErrors.relatedProduct = 'Related Product is required';
-        if (!form.serialNo.trim()) newErrors.serialNo = 'Serial No is required';
         if (!form.firstName.trim()) newErrors.firstName = 'Name is required';
         if (!form.message.trim()) {
             newErrors.message = 'Message is required';
@@ -230,7 +229,7 @@ export default function InqueryForm({ categories }) {
                                                 <span>
                                                     Existing Serial No. / Product Specification
                                                 </span>
-                                                <span className="text-red-600 ml-1 text-base leading-none">*</span>
+                                                {/* <span className="text-red-600 ml-1 text-base leading-none">*</span> */}
                                             </div>
 
                                             <div className="flex-1 bg-white px-4 py-3">

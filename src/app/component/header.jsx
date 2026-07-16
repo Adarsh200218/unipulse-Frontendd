@@ -38,12 +38,7 @@ export default function Header({ categories = [] }) {
               </Link>
             ))}
 
-            {/* <Link
-              href="/product-details"
-              className="hover:text-gray-200">
-              Electrical Intelligent
-              Assist balancer
-            </Link> */}
+            <Link href="/contact-us" className="inline-block bg-[#e10c13] text-white text-sm px-4 py-2 rounded-md border border-[#0b3445] shadow-sm hover:bg-[#116459] transition duration-300"> Contact Us</Link>
 
 
           </nav>
@@ -63,7 +58,7 @@ export default function Header({ categories = [] }) {
         <div className={`md:hidden bg-green-800 px-6 overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 py-4" : "max-h-0"}`}
         >
           <nav className="flex flex-col gap-4 text-sm font-medium">
-            
+
             {categories.slice(0, 6).map((cat) => (
               <Link
                 key={cat.id}

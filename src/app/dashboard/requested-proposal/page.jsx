@@ -4,12 +4,13 @@ import { api } from '../../apis/apiList';
 import { getToken, useAuthGuard } from '../../../helper/getCommonData';
 import Pagination from '../../component/pagination';
 import { toast } from 'react-toastify';
+import Loader from '@/app/component/Loader';
 
 export default function RequestedProposal() {
     useAuthGuard();
 
     const [proposals, setProposals] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const itemsPerPage = 10;
@@ -55,6 +56,7 @@ export default function RequestedProposal() {
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
                     <thead className="bg-[#b3ffd3]">
+
                         {/*<tr>
                         <th className="border px-4 py-2 text-center  ">S.No</th>
                         <th className="border px-4 py-2 text-left ">Name</th>
@@ -63,15 +65,17 @@ export default function RequestedProposal() {
                         <th className="border px-4 py-2 text-center ">Serial No</th>
                         <th className="border px-4 py-2 text-center ">Message</th>
                         <th className="border px-4 py-2 text-center ">Date</th>
-                       
-
                     </tr>*/}
 
                         <tr>
                             <th className="border px-2 md:px-2 py-2 text-center w-[5%]">S.No</th>
+                            <th className="border px-2 md:px-2 py-2 text-center w-[5%]">Unique ID</th>
 
                             <th className="border px-2 md:px-2 py-2 text-left w-[20%] md:w-[18%]">
                                 Name
+                            </th>
+                            <th className="border px-2 md:px-2 py-2 text-left w-[20%] md:w-[18%]">
+                                Email
                             </th>
 
                             <th className="border px-2 md:px-2 py-2 text-left w-[15%] md:w-[22%]">
@@ -104,14 +108,19 @@ export default function RequestedProposal() {
                                     <td className="border px-2 py-2 text-center">
                                         {(currentPage - 1) * itemsPerPage + index + 1}
                                     </td>
+                                    <td className="border px-2 py-2 whitespace-nowrap">{item.user?.unique_code
+                                        ? String(item.user.unique_code).padStart(3, '0')
+                                        : "N/A"}
+                                    </td>
                                     <td className="border px-2 py-2 whitespace-nowrap">{item.name}</td>
+                                    <td className="border px-2 py-2 whitespace-nowrap">{item.user?.email || "N/A"}</td>
                                     <td className="border px-2 py-2">{item.related_product}</td>
                                     <td className="border px-2 py-2 text-center">
                                         <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">
                                             {item.request_for}
                                         </span>
                                     </td>
-                                    <td className="border px-2 py-2 text-center">{item.serial_no}</td>
+                                    <td className="border px-2 py-2 text-center">{item.serial_no || "N/A"}</td>
                                     <td className="border px-2 py-2 text-center max-w-[200px] truncate">
                                         {item.message}
                                     </td>
@@ -142,8 +151,8 @@ export default function RequestedProposal() {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="6" className="text-center p-4">
-                                    {loading ? 'Loading...' : 'No data found'}
+                                <td colSpan="9" className="text-center p-4">
+                                    {loading ? <Loader /> : 'No data found'}
                                 </td>
                             </tr>
                         )}

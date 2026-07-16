@@ -1,8 +1,8 @@
-const BASE_URL = 'https://api.unipulseinstruments.com/api/';
-const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
+// const BASE_URL = 'https://api.unipulseinstruments.com/api/';
+// const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
 
-// const BASE_URL = 'http://localhost:8000/api/';
-// const BASE_URL_IMAGE = 'http://localhost:8000/storage/';
+const BASE_URL = 'http://localhost:8000/api/';
+const BASE_URL_IMAGE = 'http://localhost:8000/storage/';
 
 export const api = {
 
@@ -25,6 +25,7 @@ export const api = {
         productUpdate: `${BASE_URL}product/update`,
         productShow: `${BASE_URL}product/show`,
         productDelete: `${BASE_URL}product/delete`,
+        productPositionUpdate: `${BASE_URL}product/update-position`,
         resetPassword: `${BASE_URL}resetPassword`,
         sendResetLink: `${BASE_URL}sendResetLink`,
         productView: `${BASE_URL}product/view`,

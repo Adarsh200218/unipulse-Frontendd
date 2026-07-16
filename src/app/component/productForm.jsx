@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { api } from "../apis/apiList";
 import { getToken, useAuthGuard } from "../../helper/getCommonData";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 
 export default function ProductForm({ productId = null }) {
@@ -225,7 +223,23 @@ export default function ProductForm({ productId = null }) {
             toast.error("Server error");
         }
     };
-
+    const handleViewManual = async () => {
+        try {
+            const res = await fetch(`${api.apiCall.viewManual}/${productId}?view=true`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                    Accept: "application/pdf",
+                },
+            });
+            if (!res.ok) throw new Error();
+            const blob = await res.blob();
+            const fileURL = window.URL.createObjectURL(blob);
+            window.open(fileURL, "_blank");
+        } catch (err) {
+            toast.error("Manual Not Found / Not Uploaded");
+        }
+    };
     const inputClass =
         "w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500";
 
@@ -397,13 +411,13 @@ export default function ProductForm({ productId = null }) {
                         {existingPdf && (
                             <div className="mt-2 flex items-center gap-2">
                                 <span className="text-sm text-gray-600">Current File:</span>
-                                <Link
-                                    href={``}
-                                    target="_blank"
-                                    className="text-blue-600 underline"
+                                <button
+                                    type="button"
+                                    onClick={handleViewManual}
+                                    className="text-blue-600 underline cursor-pointer"
                                 >
                                     View Manual
-                                </Link>
+                                </button>
                             </div>
                         )}
                     </div>
