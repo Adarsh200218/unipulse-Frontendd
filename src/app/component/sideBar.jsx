@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import { removeToken, removeUser, useAuthGuard } from "../../helper/getCommonData";

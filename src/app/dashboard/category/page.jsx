@@ -199,8 +199,6 @@ export default function CategoryListPage() {
                     </tbody>
                 </table>
 
-
-
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}

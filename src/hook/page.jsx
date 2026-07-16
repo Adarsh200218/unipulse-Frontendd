@@ -12,7 +12,7 @@ export default function Page() {
 
     return (
         <>
-            {/* tera data UI */}
+            {/* tera data U */}
 
             <Pagination
                 currentPage={currentPage}

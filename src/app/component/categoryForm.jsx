@@ -126,7 +126,7 @@ export default function CategoryForm({ id = null }) {
                 alert(json.message || "Something went wrong");
             }
 
-            // alert(json.message || "Success");
+
 
         } catch (err) {
             toast.error("Server error!");

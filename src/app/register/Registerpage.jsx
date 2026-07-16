@@ -23,7 +23,6 @@ export default function RegisterPage({ categories }) {
     password: '',
     confirmPassword: '',
     other_info: '',
-    // lastName: '',
     // country: '',
   });
 

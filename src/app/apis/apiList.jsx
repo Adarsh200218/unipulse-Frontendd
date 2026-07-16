@@ -1,8 +1,8 @@
-// const BASE_URL = 'https://api.unipulseinstruments.com/api/';
-// const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
+const BASE_URL = 'https://api.unipulseinstruments.com/api/';
+const BASE_URL_IMAGE = 'https://api.unipulseinstruments.com/storage/';
 
-const BASE_URL = 'http://localhost:8000/api/';
-const BASE_URL_IMAGE = 'http://localhost:8000/storage/';
+// const BASE_URL = 'http://localhost:8000/api/';
+// const BASE_URL_IMAGE = 'http://localhost:8000/storage/';
 
 export const api = {
 
@@ -54,7 +54,6 @@ export const api = {
         deleteAbout: `${BASE_URL}about/delete`,
         contactUs: `${BASE_URL}contact/store`,
     },
-
     image: {
         imageURL: BASE_URL_IMAGE,
     },

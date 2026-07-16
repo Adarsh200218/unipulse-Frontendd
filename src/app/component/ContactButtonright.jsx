@@ -1,23 +1,14 @@
 import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
 export default function ContactButtonright() {
-  return (
-    <div className="fixed right-[-85px] lg:right-[-99px] bottom-[250px] rotate-90 z-[2432] ">
-        
-  {/*<Link
-  href="https://www.unipulseindia.com/" target="_blank"
-  className="inline-flex items-center gap-2 bg-[#e10c13] text-white px-2 py-1 rounded lg:px-4 lg:py-2  font-semibold animate-glow transition-all duration-300 hover:bg-green-900"
->
-  <span>Go Back</span>
-  <ChevronsRight size={18} className="text-yellow-400"/>
-  <span>Product Details</span>
-</Link>*/}
+    return (
+        <div className="fixed right-[-85px] lg:right-[-99px] bottom-[250px] rotate-90 z-[2432] ">
 
-<Link
-    href="https://www.unipulseindia.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
+            <Link
+                href="https://www.unipulseindia.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
         group
         inline-flex
         items-center
@@ -37,11 +28,11 @@ export default function ContactButtonright() {
         hover:shadow-lg
         hover:-translate-y-0.5
     "
->
-    <span>Go Back</span>
+            >
+                <span>Go Back</span>
 
-    <div
-        className="
+                <div
+                    className="
             flex
             h-6
             w-6
@@ -53,22 +44,22 @@ export default function ContactButtonright() {
             duration-300
             group-hover:bg-white/25
         "
-    >
-        <ChevronsRight
-            size={14}
-            className="
+                >
+                    <ChevronsRight
+                        size={14}
+                        className="
                 text-yellow-300
              
             "
-        />
-    </div>
-      {/*<span>Go Back</span>
+                    />
+                </div>
+                {/*<span>Go Back</span>
   <ChevronsRight size={18} className="text-yellow-400"/>
   <span>Product Details</span>*/}
 
-    <span>Product Details</span>
-</Link>
+                <span>Product Details</span>
+            </Link>
 
-    </div>
-  );
+        </div>
+    );
 }

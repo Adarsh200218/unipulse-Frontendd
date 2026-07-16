@@ -180,7 +180,7 @@ export default function HomeBannerForm({ id = null }) {
                                     <X size={16} />
                                 </button>
 
-                                {/* UP / DOWN BUTTONS - sirf saved images par */}
+                                {/* UP / DOWN BUTTONS - sirf saved images */}
                                 {img.id && (
                                     <div className="absolute top-2 left-2 flex flex-col gap-1">
                                         <button

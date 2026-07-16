@@ -350,7 +350,7 @@ export default function ProductForm({ productId = null }) {
                         )}
                     </div>
 
-                    {/* Catalogue Link */}
+                    {/* Catalogue Link*/}
                     <div>
                         <label className="block text-gray-700 mb-2 mt-4 font-medium">
                             Catalogue Link

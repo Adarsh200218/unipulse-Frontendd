@@ -450,7 +450,7 @@ function Table({ products }) {
                                         onClick={() => setModal(null)}
                                         className="block text-center bg-green-600 text-white px-5 py-2 rounded"
                                     >
-                                        View Catalogue →
+                                        View Catalogue 
                                     </Link>
                                 )} */}
 

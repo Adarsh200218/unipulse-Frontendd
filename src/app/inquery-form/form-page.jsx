@@ -41,7 +41,7 @@ export default function InqueryForm({ categories }) {
         { label: 'Others', value: 'others' },
     ];
 
-    // ✅ Admin check — agar admin hai to form bilkul nahi dikhega
+    // ✅Admin check — agar admin hai to form bilkul nahi dikhega
     useEffect(() => {
         const u = getUser();
         const token = getToken();
@@ -49,7 +49,7 @@ export default function InqueryForm({ categories }) {
         if (u?.role_id === 1) {
             localStorage.removeItem("redirect_after_login");
             router.replace("/dashboard/product-inquery");
-            return; // checking true rahega = null return hoga = koi flicker nahi
+            return; // checking true rahega = null return hoga
         }
 
         if (u && token) setUser(u);

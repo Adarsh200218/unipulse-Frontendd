@@ -62,7 +62,7 @@ const menuData = [
 ];
 
 export default function Sidebar() {
-  const [openIndex, setOpenIndex] = useState(0); 
+  const [openIndex, setOpenIndex] = useState(0);
   const [activeItem, setActiveItem] = useState("Shaft type");
 
   const toggleMenu = (index) => {

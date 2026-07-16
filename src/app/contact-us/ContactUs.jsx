@@ -9,7 +9,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { Omega, SquarePen } from "lucide-react";
 import { Lock } from 'lucide-react';
 import CategorySideBar from "../component/CategorySideBar";
-
 import ContactButtonright from "../component/ContactButtonright";
 
 

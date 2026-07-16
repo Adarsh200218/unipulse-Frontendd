@@ -146,8 +146,7 @@ export default function RegisterUser() {
                             <th className="border px-4 py-2 text-center">User Verified</th>
                             <th className="border px-4 py-2 text-center">User Status</th>
                             <th className="border px-4 py-2 text-center">Date</th>
-                            {/* <th className="border px-4 py-2 text-center">Country</th> */}
-                            {/* <th className="border px-4 py-2 text-left">Last Name</th> */}
+
                             {/* <th className="border px-4 py-2 text-center">Action</th> */}
                         </tr>
                     </thead>

@@ -75,7 +75,7 @@ export default function VerifyEmailPage() {
                         <div className="flex flex-col items-center gap-4">
                             <div className="text-red-500 text-6xl"></div>
                             <h2 className="text-xl font-bold text-red-600">{message}</h2>
-                            {/* <p className="text-gray-500 text-sm">You can Login Now</p> */}
+                            {/* <p className="text-gray-500 text-sm">You cLogin Now</p> */}
                         </div>
                     )}
 

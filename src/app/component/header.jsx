@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { slugify } from "../../helper/getCommonData";
-//import ContactButtonright from "./ContactButtonright";
+
 
 export default function Header({ categories = [] }) {
   const [isOpen, setIsOpen] = useState(false);

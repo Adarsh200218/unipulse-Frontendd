@@ -64,9 +64,6 @@ export default function CategorySideBar({ categories = [], showAuth = true, href
                                         PAN INDIA
                                     </span>
                                 </p>
-
-
-
                             </div>
 
                         </div>

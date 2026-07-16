@@ -220,7 +220,6 @@ export default function ProductQueryPage() {
                             <th className="border px-2 py-2 text-center">Catalogue</th>
                             <th className="border px-2 py-2 text-center">Manual</th>
                             <th className="border px-2 py-2 text-center">Price</th>
-                            {/* <th className="border px-4 py-2 text-center">Proposal</th> */}
                             <th className="border px-2 py-2 text-center">Date</th>
                             {/* <th className="border px-4 py-2 text-center">Action</th> */}
                         </tr>
@@ -294,17 +293,6 @@ export default function ProductQueryPage() {
                                             <span className="text-gray-400">—</span>
                                         )}
                                     </td>
-
-                                    {/* Proposal */}
-                                    {/* <td className="border px-4 py-2 text-center">
-                                    {log.proposal ? (
-                                        <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold">
-                                            ✓ Yes
-                                        </span>
-                                    ) : (
-                                        <span className="text-gray-400">—</span>
-                                    )}
-                                </td> */}
 
                                     {/* Date */}
                                     <td className="border px-2 lg:px-4 py-2 text-center text-xs text-gray-500">

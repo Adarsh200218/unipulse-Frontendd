@@ -57,16 +57,6 @@ export default function RequestedProposal() {
                 <table className="w-full min-w-[700px] border border-gray-300 border-collapse text-sm mt-4 mb-6 shadow">
                     <thead className="bg-[#b3ffd3]">
 
-                        {/*<tr>
-                        <th className="border px-4 py-2 text-center  ">S.No</th>
-                        <th className="border px-4 py-2 text-left ">Name</th>
-                        <th className="border px-4 py-2 text-left ">Related Product</th>
-                        <th className="border px-4 py-2 text-center ">Requested For</th>
-                        <th className="border px-4 py-2 text-center ">Serial No</th>
-                        <th className="border px-4 py-2 text-center ">Message</th>
-                        <th className="border px-4 py-2 text-center ">Date</th>
-                    </tr>*/}
-
                         <tr>
                             <th className="border px-2 md:px-2 py-2 text-center w-[5%]">S.No</th>
                             <th className="border px-2 md:px-2 py-2 text-center w-[5%]">Unique ID</th>

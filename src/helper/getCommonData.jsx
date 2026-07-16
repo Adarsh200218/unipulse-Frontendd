@@ -23,7 +23,7 @@ export function removeToken() {
   localStorage.removeItem("token");
 }
 /* =========================
-   USER HELPERS
+   USER HELPER
 ========================= */
 // ✅ Save user object
 export function setUser(user) {

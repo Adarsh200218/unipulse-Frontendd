@@ -3,7 +3,7 @@
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
     if (totalPages <= 1) return null;
 
-    // 🔥 Show only nearby pages (current ±2)
+    // Show only nearby pages (current ±2)
     const getPageNumbers = () => {
         const pages = [];
 
@@ -36,8 +36,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
                     key={page}
                     onClick={() => onPageChange(page)}
                     className={`px-3 py-1 border rounded ${currentPage === page
-                            ? "bg-green-600 text-white"
-                            : "bg-white"
+                        ? "bg-green-600 text-white"
+                        : "bg-white"
                         }`}
                 >
                     {page}

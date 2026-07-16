@@ -315,7 +315,7 @@ export default function ProductListPage() {
                                                 <input
                                                     type="number"
                                                     // min="1"
-                                                    // placeholder={`1-${products.length}`}
+                                                    // placeholder
                                                     onChange={(e) =>
                                                         setPositions({
                                                             ...positions,
