@@ -80,7 +80,7 @@ export default function Home({ categories }) {
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-6 gap-3 md:grid-cols-12">
 
-                        {/* ================= SIDEBAR ================= */}
+                        {/* ================= SIDEBA ================= */}
 
                         <aside className="order-2 lg:order-1 w-full md:col-span-4 lg:col-span-4 xl:col-span-3 shrink-0 px-4 lg:px-2 lg:p-4 mt-2 xl:mt-9  ">
                             <div className="lg:sticky lg:top-20 overflow-hidden mb-2">
